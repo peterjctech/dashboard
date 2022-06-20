@@ -13,6 +13,7 @@
 
 <style lang="scss">
     @import "./styles/helpers.scss";
+    @import "./styles/toast.scss";
 
     * {
         margin: 0;

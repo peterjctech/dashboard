@@ -12,7 +12,9 @@
         "lib": ["esnext", "dom"],
         "paths": {
             "@components": ["./components"],
+            "@domain": ["./domain"],
             "@helpers": ["./helpers"],
+            "@mixins": ["./mixins"],
             "@views": ["./views"]
         }
     },

@@ -1,3 +1,20 @@
 .bordered {
     border: solid black 2px;
 }
+
+.title {
+    color: $neutral-light;
+    text-align: center;
+    font-family: $fancy;
+}
+
+.form-modal {
+    width: 30%;
+    h6 {
+        margin: 2rem auto 1rem 1rem;
+    }
+
+    &__button {
+        float: right;
+    }
+}

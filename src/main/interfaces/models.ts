@@ -1,23 +1,23 @@
-interface TicketCategoryModel {
+export interface TicketCategoryModel {
     category_id: string;
     category: string;
     class: string;
 }
 
-interface EventCategoryModel {
+export interface EventCategoryModel {
     category_id: string;
     category: string;
     class: string;
 }
 
-interface ActivityModel {
+export interface ActivityModel {
     activity_id: string;
     activity: string;
     type: "Timed" | "Duration" | "Sets" | "Count";
     class: string;
 }
 
-interface TicketModel {
+export interface TicketModel {
     ticket_id: string;
     ticket: string;
     is_toggled: number;
@@ -29,7 +29,7 @@ interface TicketModel {
     status: "Passed" | "Today" | null;
 }
 
-interface EventModel {
+export interface EventModel {
     event_id: string;
     event: string;
     timestamp: number;
@@ -40,7 +40,7 @@ interface EventModel {
     status: "Passed" | "Today" | "Upcoming" | null;
 }
 
-interface WorkoutModel {
+export interface WorkoutModel {
     workout_id: string;
     workout: string;
     timestamp: number;
@@ -51,7 +51,7 @@ interface WorkoutModel {
     class: string;
 }
 
-interface GoalModel {
+export interface GoalModel {
     goal_id: string;
     goal: string;
     date: string;
@@ -61,7 +61,7 @@ interface GoalModel {
     status: "Passed" | "Today" | "Upcoming" | null;
 }
 
-interface ShortcutModel {
+export interface ShortcutModel {
     shortcut_id: string;
     shortcut: string;
     title: string;
@@ -69,14 +69,14 @@ interface ShortcutModel {
     icon: string;
 }
 
-interface ReminderModel {
+export interface ReminderModel {
     reminder_id: string;
     reminder: string;
     timestamp: number;
     time: string;
 }
 
-interface AchievementModel {
+export interface AchievementModel {
     achievement_id: string;
     achievement: string;
     timestamp: number;
@@ -84,7 +84,7 @@ interface AchievementModel {
     class: string;
 }
 
-interface NoteModel {
+export interface NoteModel {
     note_id: string;
     title: string;
     note: string;
@@ -93,7 +93,7 @@ interface NoteModel {
     timestamp: number;
 }
 
-interface HabitModel {
+export interface HabitModel {
     habit_id: string;
     habit: string;
     margin: number;
@@ -104,7 +104,7 @@ interface HabitModel {
     created_at: string;
 }
 
-interface QuoteModel {
+export interface QuoteModel {
     quote_id: string;
     quote: string;
     image: string;

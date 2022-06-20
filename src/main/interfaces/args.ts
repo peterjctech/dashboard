@@ -1,74 +1,74 @@
-interface TicketCategoryArgs {
+export interface TicketCategoryArgs {
     category: string;
     class?: string;
 }
 
-interface EventCategoryArgs {
+export interface EventCategoryArgs {
     category: string;
     class?: string;
 }
 
-interface ActivityArgs {
+export interface ActivityArgs {
     activity: string;
     type: "Timed" | "Duration" | "Sets" | "Count";
     class?: string;
 }
 
-interface TicketArgs {
+export interface TicketArgs {
     ticket: string;
     deadline?: number;
     category_id?: string;
 }
 
-interface EventArgs {
+export interface EventArgs {
     event: string;
     date: number;
     category_id?: string;
 }
 
-interface WorkoutArgs {
+export interface WorkoutArgs {
     workout: string;
     date: number;
     activity_id: string;
 }
 
-interface GoalArgs {
+export interface GoalArgs {
     goal: string;
     deadline?: number | "Weekly" | "Monthly" | "Quarterly" | "Yearly";
 }
 
-interface ShortcutArgs {
+export interface ShortcutArgs {
     shortcut: string;
     title: string;
     type: "Link" | "Application" | "Search";
     icon?: string;
 }
 
-interface ReminderArgs {
+export interface ReminderArgs {
     reminder: string;
     absolute?: number;
     relative_number?: number;
     relative_unit?: "minutes" | "hours" | "days";
 }
 
-interface AchievementArgs {
+export interface AchievementArgs {
     achievement: string;
     date?: number;
     class: string;
 }
 
-interface NoteArgs {
+export interface NoteArgs {
     title: string;
     note: string;
 }
 
-interface HabitArgs {
+export interface HabitArgs {
     habit: string;
     margin: number;
     class?: string;
 }
 
-interface QuoteArgs {
+export interface QuoteArgs {
     quote: string;
     image_url?: string;
 }

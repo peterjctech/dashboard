@@ -19,7 +19,9 @@ const config = defineConfig({
         alias: {
             "@assets": Path.join(__dirname, "..", "src", "renderer", "assets"),
             "@components": Path.join(__dirname, "..", "src", "renderer", "components"),
+            "@domain": Path.join(__dirname, "..", "src", "renderer", "domain"),
             "@helpers": Path.join(__dirname, "..", "src", "renderer", "helpers"),
+            "@mixins": Path.join(__dirname, "..", "src", "renderer", "mixins"),
             "@views": Path.join(__dirname, "..", "src", "renderer", "views"),
         },
     },

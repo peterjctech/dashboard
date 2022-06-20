@@ -1,0 +1,45 @@
+Ticket Categories: /settings
+Event Categories: /settings
+Activities: /settings
+
+Tickets: /tickets, /home
+Events: /planner, /home
+Workouts: /fitness
+
+Goals: /planner
+Shortcuts: /settings, /home
+Reminders: /home
+Achievements: /achievements
+Notes: /notes
+Habits: /settings, /home
+Quotes: /settings, /home
+
+
+HomePage
+    tickets
+    events
+    shortcuts
+    reminders
+    quotes
+    weather
+    clock
+SettingsPage
+    ticketCategories
+    eventCategories
+    activities
+    shortcuts
+    habits
+    quotes
+TicketsPage
+    tickets
+FitnessPage
+    workouts
+
+AchievementsPage
+    achievements
+PlannerPage
+    events
+    goals
+    habits
+NotesPage
+    notes
