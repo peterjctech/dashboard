@@ -9,12 +9,15 @@
         "build": "node scripts/build.js && electron-builder -c config/electron-builder.json"
     },
     "devDependencies": {
+        "@vicons/ionicons5": "^0.12.0",
+        "@vicons/utils": "^0.1.4",
         "@vitejs/plugin-vue": "^2.2.4",
         "@vue/cli": "^5.0.1",
         "chalk": "^4.1.2",
         "chokidar": "^3.5.3",
         "electron": "^19.0.0",
         "electron-builder": "^23.0.3",
+        "naive-ui": "^2.30.5",
         "sass": "^1.52.3",
         "sass-loader": "^8.0.2",
         "typescript": "^4.6.2",
@@ -23,6 +26,7 @@
     "dependencies": {
         "sqlite": "^4.1.1",
         "sqlite3": "^5.0.8",
-        "vue": "^3.2.36"
+        "vue": "^3.2.36",
+        "vue-router": "^4.0.16"
     }
 }

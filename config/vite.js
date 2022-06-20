@@ -17,7 +17,17 @@ const config = defineConfig({
     plugins: [vuePlugin()],
     resolve: {
         alias: {
-            "@": Path.join(__dirname, "..", "src", "renderer"),
+            "@assets": Path.join(__dirname, "..", "src", "renderer", "assets"),
+            "@components": Path.join(__dirname, "..", "src", "renderer", "components"),
+            "@helpers": Path.join(__dirname, "..", "src", "renderer", "helpers"),
+            "@views": Path.join(__dirname, "..", "src", "renderer", "views"),
+        },
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "./src/renderer/styles/index.scss";`,
+            },
         },
     },
 });

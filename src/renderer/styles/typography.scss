@@ -1,0 +1,12 @@
+$default: "Exo 2";
+$fancy: "Macondo";
+
+@font-face {
+    font-family: $default;
+    src: url("@assets/fonts/Exo2-Regular.ttf");
+}
+
+@font-face {
+    font-family: $fancy;
+    src: url("@assets/fonts/Macondo-Regular.ttf");
+}

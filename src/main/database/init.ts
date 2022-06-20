@@ -14,6 +14,8 @@ export const init = async () => {
                 await migration_1();
                 database_version = 1;
         }
+
+        console.log("Database is up to date");
     } catch (error) {
         console.log(error);
     }
