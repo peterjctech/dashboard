@@ -26,6 +26,7 @@ interface TicketModel {
     category_id: string;
     category: string;
     class: string;
+    status: "Passed" | "Today" | null;
 }
 
 interface EventModel {
@@ -36,6 +37,7 @@ interface EventModel {
     category_id: string;
     category: string;
     class: string;
+    status: "Passed" | "Today" | "Upcoming" | null;
 }
 
 interface WorkoutModel {
@@ -56,7 +58,7 @@ interface GoalModel {
     timestamp: number;
     created_timestamp: number;
     created_at: string;
-    is_due: boolean;
+    status: "Passed" | "Today" | "Upcoming" | null;
 }
 
 interface ShortcutModel {
@@ -89,4 +91,21 @@ interface NoteModel {
     created_at: string;
     updated_at: string;
     timestamp: number;
+}
+
+interface HabitModel {
+    habit_id: string;
+    habit: string;
+    margin: number;
+    last_completed: number;
+    last_broken: number;
+    timestamp: number;
+    class: string;
+    created_at: string;
+}
+
+interface QuoteModel {
+    quote_id: string;
+    quote: string;
+    image: string;
 }

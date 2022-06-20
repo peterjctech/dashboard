@@ -37,6 +37,11 @@ export const migration_1 = async () => {
         await db.exec(
             "CREATE TABLE notes (note_id TEXT PRIMARY KEY, title TEXT, note TEXT, created_at TEXT, updated_at TEXT, timestamp INTEGER)"
         );
+        // e.g. => margin is in days, when retrieving habits, if last_completed is more than x days before now, reset last broken to last_completed + x days. when completing, check previously mentioned condition, and if it's within margin update last_completed
+        await db.exec(
+            "CREATE TABLE habits (habit_id TEXT PRIMARY KEY, habit TEXT, margin INTEGER, last_completed INTEGER, last_broken INTEGER created_at TEXT, timestamp INTEGER, class TEXT)"
+        );
+        await db.exec("CREATE TABLE quotes (quote_id TEXT PRIMARY KEY, quote TEXT, image TEXT)");
 
         await db.run("UPDATE meta SET value = 1 WHERE key = 'database_version'");
         console.log("Successfully migrated to database version 1.0.0");

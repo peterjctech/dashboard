@@ -1,17 +1,17 @@
 interface TicketCategoryArgs {
     category: string;
-    class: string;
+    class?: string;
 }
 
 interface EventCategoryArgs {
     category: string;
-    class: string;
+    class?: string;
 }
 
 interface ActivityArgs {
     activity: string;
     type: "Timed" | "Duration" | "Sets" | "Count";
-    class: string;
+    class?: string;
 }
 
 interface TicketArgs {
@@ -46,17 +46,29 @@ interface ShortcutArgs {
 
 interface ReminderArgs {
     reminder: string;
-    minutes?: number;
-    time?: number;
+    absolute?: number;
+    relative_number?: number;
+    relative_unit?: "minutes" | "hours" | "days";
 }
 
 interface AchievementArgs {
     achievement: string;
-    date: number;
+    date?: number;
     class: string;
 }
 
 interface NoteArgs {
     title: string;
     note: string;
+}
+
+interface HabitArgs {
+    habit: string;
+    margin: number;
+    class?: string;
+}
+
+interface QuoteArgs {
+    quote: string;
+    image_url?: string;
 }
