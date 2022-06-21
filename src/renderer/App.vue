@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { NConfigProvider, darkTheme, GlobalThemeOverrides } from "naive-ui";
+    import { NConfigProvider, darkTheme, GlobalThemeOverrides, NDialogProvider } from "naive-ui";
     import { Titlebar, Sidebar } from "@components";
 
     const themeOverrides: GlobalThemeOverrides = {
@@ -16,9 +16,11 @@
 
 <template>
     <NConfigProvider :theme="darkTheme" :theme-overrides="themeOverrides">
-        <Titlebar />
-        <Sidebar />
-        <router-view />
+        <NDialogProvider>
+            <Titlebar />
+            <Sidebar />
+            <router-view />
+        </NDialogProvider>
     </NConfigProvider>
 </template>
 

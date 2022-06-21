@@ -8,6 +8,9 @@ import TicketCategoriesConfig from "./settings/TicketCategoriesConfig.vue";
 import AllTickets from "./tickets/AllTickets.vue";
 import TicketForm from "./tickets/TicketForm.vue";
 
+import NotesView from "./notes/NotesView.vue";
+import Note from "./notes/Note.vue";
+
 export {
     ActivitiesConfig,
     EventCategoriesConfig,
@@ -17,4 +20,6 @@ export {
     TicketCategoriesConfig,
     AllTickets,
     TicketForm,
+    NotesView,
+    Note,
 };

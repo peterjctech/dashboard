@@ -16,15 +16,13 @@ interface AddImageArgs {
     height?: number;
 }
 
-const now = dayjs();
-
-const date = now.format("dddd, Do MMMM, YYYY");
-
 export const openDB = () => open(db);
 
 export const getId = () => uuidv4();
 
 export const formatDate = (date: dayjs.Dayjs) => dayjs(date).format("dddd, Do MMMM, YYYY");
+
+export const formatDateTime = (date: dayjs.Dayjs) => dayjs(date).format("HH:mm, dddd, Do MMMM, YYYY");
 
 export const imagesDir = (name?: string) => {
     let path = app.getPath("userData") + "/Images";

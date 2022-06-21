@@ -50,10 +50,10 @@
                 filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.status === "Today");
                 break;
             case 0:
-                filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.is_toggled === 0);
+                filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.is_focused === 0);
                 break;
             case 1:
-                filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.is_toggled === 1);
+                filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.is_focused === 1);
                 break;
             case 2:
                 filteredTickets.value = tickets.value;
@@ -74,8 +74,8 @@
             <div class="filters">
                 <Button @click="filter = -2" type="warning">Deadline Passed</Button>
                 <Button @click="filter = -1" type="success">Deadline Today</Button>
-                <Button @click="filter = 1" type="primary">Toggled</Button>
-                <Button @click="filter = 0" type="info">Untoggled</Button>
+                <Button @click="filter = 1" type="primary">Focused</Button>
+                <Button @click="filter = 0" type="info">Unfocused</Button>
                 <Button @click="filter = 2" type="error">Reset Filter</Button>
             </div>
             <div class="filters">

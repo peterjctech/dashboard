@@ -16,8 +16,8 @@
             render(row: TicketModel) {
                 return h(
                     IconButton,
-                    { onClick: () => emit("toggle", row), type: row.is_toggled ? "warning" : "success" },
-                    row.is_toggled ? () => h(EyeOff) : () => h(Eye)
+                    { onClick: () => emit("toggle", row), type: row.is_focused ? "warning" : "success" },
+                    row.is_focused ? () => h(EyeOff) : () => h(Eye)
                 );
             },
             width: 80,

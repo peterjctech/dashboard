@@ -3,22 +3,6 @@ import { getId, openDB, formatDate } from "../utils";
 import { TicketArgs, TicketModel } from "../interfaces";
 import dayjs from "dayjs";
 
-// ticket: string;
-// deadline?: number;
-// category_id?: string;
-
-// ticket_id: string;
-// ticket: string;
-// is_toggled: number;
-// timestamp: number;
-// date: string;
-// category_id: string;
-// category: string;
-// class: string;
-// status: "Passed" | "Today" | null;
-
-// "CREATE TABLE tickets (ticket_id TEXT PRIMARY KEY, ticket TEXT, is_toggled INTEGER, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES ticket_categories(category_id))"
-
 const parseTicketData = (tickets: TicketModel[]) => {
     const currentTime = dayjs().unix();
     const endOfDay = dayjs().endOf("day").unix();
@@ -52,7 +36,7 @@ ipcMain.handle("createTicket", async (_, args: TicketArgs) => {
     const props = {
         ticket_id: getId(),
         ticket: args.ticket,
-        is_toggled: 0,
+        is_focused: 0,
         timestamp: dueDate.unix(),
         date: formatDate(dueDate),
         category_id: args.category_id || null,
@@ -61,12 +45,12 @@ ipcMain.handle("createTicket", async (_, args: TicketArgs) => {
     try {
         const db = await openDB();
         await db.run(
-            "INSERT INTO tickets (ticket_id, ticket, is_toggled, timestamp, date, category_id) VALUES (?, ?, ?, ?, ?, ?)",
-            [props.ticket_id, props.ticket, props.is_toggled, props.timestamp, props.date, props.category_id]
+            "INSERT INTO tickets (ticket_id, ticket, is_focused, timestamp, date, category_id) VALUES (?, ?, ?, ?, ?, ?)",
+            [props.ticket_id, props.ticket, props.is_focused, props.timestamp, props.date, props.category_id]
         );
 
         const tickets = await db.all(
-            "SELECT ticket_id, ticket, is_toggled, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id)"
+            "SELECT ticket_id, ticket, is_focused, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id)"
         );
         const data = parseTicketData(tickets);
 
@@ -81,7 +65,7 @@ ipcMain.handle("getTickets", async () => {
     try {
         const db = await openDB();
         const tickets = await db.all(
-            "SELECT ticket_id, ticket, is_toggled, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id)"
+            "SELECT ticket_id, ticket, is_focused, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id)"
         );
         const data = parseTicketData(tickets);
 
@@ -96,7 +80,7 @@ ipcMain.handle("getToggledTickets", async () => {
     try {
         const db = await openDB();
         const tickets = await db.all(
-            "SELECT ticket_id, ticket, is_toggled, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id) WHERE is_toggled = 1"
+            "SELECT ticket_id, ticket, is_focused, timestamp, date, category_id, category, class FROM tickets INNER JOIN ticket_categories USING (category_id) WHERE is_focused = 1"
         );
         const data = parseTicketData(tickets);
 
@@ -108,12 +92,12 @@ ipcMain.handle("getToggledTickets", async () => {
 });
 
 ipcMain.handle("toggleTicket", async (_, args: TicketModel) => {
-    const toggle = args.is_toggled === 0 ? 1 : 0;
+    const toggle = args.is_focused === 0 ? 1 : 0;
     try {
         const db = await openDB();
-        await db.run("UPDATE tickets SET is_toggled = ? WHERE ticket_id = ?", [toggle, args.ticket_id]);
+        await db.run("UPDATE tickets SET is_focused = ? WHERE ticket_id = ?", [toggle, args.ticket_id]);
 
-        return { info: `Toggled ticket ${args.ticket}`, data: { ...args, is_toggled: toggle } };
+        return { info: `Toggled ticket ${args.ticket}`, data: { ...args, is_focused: toggle } };
     } catch (error) {
         console.log(error);
         return { error: "Failed to update ticket" };

@@ -23,8 +23,6 @@ HomePage
     quotes
     weather
     clock
-TicketsPage
-    tickets
 FitnessPage
     workouts
 AchievementsPage
@@ -35,13 +33,3 @@ PlannerPage
     habits
 NotesPage
     notes
-
-
-    
-SettingsPage
-    ticketCategories
-    eventCategories
-    activities
-    shortcuts
-    habits
-    quotes

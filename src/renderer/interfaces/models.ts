@@ -20,7 +20,7 @@ export interface ActivityModel {
 export interface TicketModel {
     ticket_id: string;
     ticket: string;
-    is_toggled: number;
+    is_focused: number;
     timestamp: number;
     date: string;
     category_id: string;
@@ -88,7 +88,6 @@ export interface NoteModel {
     note_id: string;
     title: string;
     note: string;
-    created_at: string;
     updated_at: string;
     timestamp: number;
 }
