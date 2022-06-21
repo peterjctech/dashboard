@@ -1,10 +1,16 @@
 <script setup lang="ts">
-    import { NConfigProvider, darkTheme } from "naive-ui";
+    import { NConfigProvider, darkTheme, GlobalThemeOverrides } from "naive-ui";
     import { Titlebar, Sidebar } from "@components";
+
+    const themeOverrides: GlobalThemeOverrides = {
+        DataTable: {
+            tdTextColor: "black",
+        },
+    };
 </script>
 
 <template>
-    <NConfigProvider :theme="darkTheme">
+    <NConfigProvider :theme="darkTheme" :theme-overrides="themeOverrides">
         <Titlebar />
         <Sidebar />
         <router-view />
@@ -14,6 +20,7 @@
 <style lang="scss">
     @import "./styles/helpers.scss";
     @import "./styles/toast.scss";
+    @import "./styles/data-table.scss";
 
     * {
         margin: 0;

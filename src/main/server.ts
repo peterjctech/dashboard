@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
-import { join } from "path";
+import path from "path";
+import contextMenu from "electron-context-menu";
 import { init } from "./database";
 import "./controllers";
 
@@ -9,19 +10,25 @@ const createWindow = () => {
     const mainWindow = new BrowserWindow({
         frame: false,
         webPreferences: {
-            preload: join(__dirname, "preload.js"),
+            preload: path.join(__dirname, "preload.js"),
             nodeIntegration: false,
             contextIsolation: true,
         },
     });
 
     mainWindow.maximize();
+    contextMenu();
+
+    mainWindow.webContents.on("new-window", (e, url) => {
+        e.preventDefault();
+        require("electron").shell.openExternal(url);
+    });
 
     if (process.env.NODE_ENV === "development") {
         const rendererPort = process.argv[2];
         mainWindow.loadURL(`http://localhost:${rendererPort}`);
     } else {
-        mainWindow.loadFile(join(app.getAppPath(), "renderer", "index.html"));
+        mainWindow.loadFile(path.join(app.getAppPath(), "renderer", "index.html"));
     }
 };
 

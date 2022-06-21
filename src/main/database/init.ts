@@ -1,5 +1,6 @@
-import { openDB } from "../utils";
+import { openDB, imagesDir } from "../utils";
 import { migration_1 } from "./";
+import { mkdir } from "fs";
 
 export const init = async () => {
     try {
@@ -14,6 +15,10 @@ export const init = async () => {
                 await migration_1();
                 database_version = 1;
         }
+
+        mkdir(imagesDir(), { recursive: true }, (e) => {
+            if (e) console.log("Failed to create image directory => ", e);
+        });
 
         console.log("Database is up to date");
     } catch (error) {

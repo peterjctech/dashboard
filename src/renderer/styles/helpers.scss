@@ -10,6 +10,7 @@
 
 .form-modal {
     width: 30%;
+
     h6 {
         margin: 2rem auto 1rem 1rem;
     }
@@ -17,4 +18,22 @@
     &__button {
         float: right;
     }
+}
+
+.form {
+    h4 {
+        text-align: center;
+    }
+
+    h6 {
+        margin: 2rem auto 1rem 1rem;
+    }
+
+    &__button {
+        margin-top: 3rem;
+    }
+}
+
+.sized-image {
+    height: 8rem;
 }

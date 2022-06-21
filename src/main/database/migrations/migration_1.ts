@@ -24,9 +24,7 @@ export const migration_1 = async () => {
         await db.exec(
             "CREATE TABLE goals (goal_id TEXT PRIMARY KEY, goal TEXT, date TEXT, timestamp INTEGER, created_timestamp INTEGER, created_at TEXT)"
         );
-        await db.exec(
-            "CREATE TABLE shortcuts (shortcut_id TEXT PRIMARY KEY, shortcut TEXT, title TEXT, type TEXT, icon TEXT)"
-        );
+        await db.exec("CREATE TABLE shortcuts (shortcut_id TEXT PRIMARY KEY, shortcut TEXT, title TEXT, type TEXT)");
         await db.exec(
             "CREATE TABLE reminders (reminder_id TEXT PRIMARY KEY, reminder TEXT, timestamp INTEGER, time TEXT)"
         );
@@ -39,9 +37,9 @@ export const migration_1 = async () => {
         );
         // e.g. => margin is in days, when retrieving habits, if last_completed is more than x days before now, reset last broken to last_completed + x days. when completing, check previously mentioned condition, and if it's within margin update last_completed
         await db.exec(
-            "CREATE TABLE habits (habit_id TEXT PRIMARY KEY, habit TEXT, margin INTEGER, last_completed INTEGER, last_broken INTEGER created_at TEXT, timestamp INTEGER, class TEXT)"
+            "CREATE TABLE habits (habit_id TEXT PRIMARY KEY, habit TEXT, margin INTEGER, last_completed INTEGER, last_broken INTEGER, created_at TEXT, timestamp INTEGER, class TEXT)"
         );
-        await db.exec("CREATE TABLE quotes (quote_id TEXT PRIMARY KEY, quote TEXT, image TEXT)");
+        await db.exec("CREATE TABLE quotes (quote_id TEXT PRIMARY KEY, quote TEXT)");
 
         await db.run("UPDATE meta SET value = 1 WHERE key = 'database_version'");
         console.log("Successfully migrated to database version 1.0.0");

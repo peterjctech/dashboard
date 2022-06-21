@@ -1,0 +1,140 @@
+.n-data-table-base-table {
+    background-color: lighten($neutral-dark, 7%);
+}
+
+.n-data-table-tr {
+    td {
+        font-weight: bold;
+    }
+
+    &.primary {
+        td {
+            background-color: rgba($color: $primary, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $primary !important;
+            }
+        }
+    }
+    &.secondary {
+        td {
+            background-color: rgba($color: $secondary, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $secondary !important;
+            }
+        }
+    }
+    &.tertiary {
+        td {
+            background-color: rgba($color: $tertiary, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $tertiary !important;
+            }
+        }
+    }
+    &.red {
+        td {
+            background-color: rgba($color: $red, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $red !important;
+            }
+        }
+    }
+    &.orange {
+        td {
+            background-color: rgba($color: $orange, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $orange !important;
+            }
+        }
+    }
+    &.yellow {
+        td {
+            background-color: rgba($color: $yellow, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $yellow !important;
+            }
+        }
+    }
+    &.green {
+        td {
+            background-color: rgba($color: $green, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $green !important;
+            }
+        }
+    }
+    &.cyan {
+        td {
+            background-color: rgba($color: $cyan, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $cyan !important;
+            }
+        }
+    }
+    &.blue {
+        td {
+            background-color: rgba($color: $blue, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $blue !important;
+            }
+        }
+    }
+    &.purple {
+        td {
+            background-color: rgba($color: $purple, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $purple !important;
+            }
+        }
+    }
+    &.magenta {
+        td {
+            background-color: rgba($color: $magenta, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $magenta !important;
+            }
+        }
+    }
+    &.pink {
+        td {
+            background-color: rgba($color: $pink, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $pink !important;
+            }
+        }
+    }
+    &.light {
+        td {
+            background-color: rgba($color: $light, $alpha: 0.8);
+        }
+        &:hover {
+            td {
+                background-color: $light !important;
+            }
+        }
+    }
+}

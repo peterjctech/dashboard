@@ -1,5 +1,5 @@
 import Titlebar from "./Titlebar.vue";
 import Sidebar from "./Sidebar.vue";
-import AddButton from "./AddButton.vue";
+import IconButton from "./IconButton.vue";
 
-export { Titlebar, Sidebar, AddButton };
+export { Titlebar, Sidebar, IconButton };

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import Toast, { POSITION, TYPE } from "vue-toastification";
 import { Icon } from "@vicons/utils";
-import { NButton, NModal, NDataTable, NInput, NSelect } from "naive-ui";
+import { NButton, NDataTable, NInput, NSelect, NCard, NInputNumber } from "naive-ui";
 import { router } from "./router";
 
 const app = createApp(App);
@@ -21,8 +21,9 @@ app.use(router)
     })
     .component("Button", NButton)
     .component("Icon", Icon)
-    .component("Modal", NModal)
     .component("DataTable", NDataTable)
     .component("Input", NInput)
     .component("Select", NSelect)
+    .component("Card", NCard)
+    .component("InputNumber", NInputNumber)
     .mount("#app");

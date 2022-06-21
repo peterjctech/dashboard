@@ -1,4 +1,5 @@
-import { ipcMain, BrowserWindow } from "electron";
+import { ipcMain, BrowserWindow, dialog, app } from "electron";
+import { readFileSync } from "fs";
 
 ipcMain.handle("minimizeWindow", () => {
     BrowserWindow.getFocusedWindow()?.minimize();

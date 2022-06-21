@@ -1,0 +1,111 @@
+export interface TicketCategoryModel {
+    category_id: string;
+    category: string;
+    class: string;
+}
+
+export interface EventCategoryModel {
+    category_id: string;
+    category: string;
+    class: string;
+}
+
+export interface ActivityModel {
+    activity_id: string;
+    activity: string;
+    type: "Timed" | "Duration" | "Sets" | "Count";
+    class: string;
+}
+
+export interface TicketModel {
+    ticket_id: string;
+    ticket: string;
+    is_toggled: number;
+    timestamp: number;
+    date: string;
+    category_id: string;
+    category: string;
+    class: string;
+    status: "Passed" | "Today" | null;
+}
+
+export interface EventModel {
+    event_id: string;
+    event: string;
+    timestamp: number;
+    date: string;
+    category_id: string;
+    category: string;
+    class: string;
+    status: "Passed" | "Today" | "Upcoming" | null;
+}
+
+export interface WorkoutModel {
+    workout_id: string;
+    workout: string;
+    timestamp: number;
+    date: string;
+    activity_id: string;
+    activity: string;
+    type: "Timed" | "Duration" | "Sets" | "Count";
+    class: string;
+}
+
+export interface GoalModel {
+    goal_id: string;
+    goal: string;
+    date: string;
+    timestamp: number;
+    created_timestamp: number;
+    created_at: string;
+    status: "Passed" | "Today" | "Upcoming" | null;
+}
+
+export interface ShortcutModel {
+    shortcut_id: string;
+    shortcut: string;
+    title: string;
+    type: "Link" | "Application" | "Search";
+    icon: string;
+}
+
+export interface ReminderModel {
+    reminder_id: string;
+    reminder: string;
+    timestamp: number;
+    time: string;
+}
+
+export interface AchievementModel {
+    achievement_id: string;
+    achievement: string;
+    timestamp: number;
+    date: string;
+    class: string;
+}
+
+export interface NoteModel {
+    note_id: string;
+    title: string;
+    note: string;
+    created_at: string;
+    updated_at: string;
+    timestamp: number;
+}
+
+export interface HabitModel {
+    habit_id: string;
+    habit: string;
+    margin: number;
+    last_completed: number;
+    last_broken: number;
+    timestamp: number;
+    class: string;
+    created_at: string;
+}
+
+export interface QuoteModel {
+    quote_id: string;
+    quote: string;
+    image: string;
+}
