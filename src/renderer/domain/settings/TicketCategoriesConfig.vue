@@ -25,7 +25,8 @@
     });
 
     const createTicketCategory = async () => {
-        ticketCategories.value.push(await invoke("createTicketCategory", ticketCategoryData.value));
+        const response = await invoke("createTicketCategory", ticketCategoryData.value);
+        if (response) ticketCategories.value.push(response);
     };
     const updateTicketCategory = async () => {
         const response = await invoke("updateTicketCategory", selectedCategory.value);

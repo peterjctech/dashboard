@@ -3,6 +3,11 @@
     import { Titlebar, Sidebar } from "@components";
 
     const themeOverrides: GlobalThemeOverrides = {
+        common: {
+            primaryColorPressed: "#8a2be2",
+            primaryColorHover: "#a155e7",
+            primaryColor: "#9540e4",
+        },
         DataTable: {
             tdTextColor: "black",
         },

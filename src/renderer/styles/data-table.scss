@@ -137,4 +137,15 @@
             }
         }
     }
+
+    &.error {
+        td {
+            color: darkred;
+        }
+    }
+    &.success {
+        td {
+            color: darkgreen;
+        }
+    }
 }

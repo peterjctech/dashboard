@@ -3,19 +3,6 @@ import { getId, openDB, formatDate } from "../utils";
 import { HabitArgs, HabitModel } from "../interfaces";
 import dayjs from "dayjs";
 
-// habit_id: string;
-// habit: string;
-// margin: number;
-// last_completed: number;
-// last_broken: number;
-// timestamp: number;
-// class: string;
-// created_at: string;
-
-// habit: string;
-// margin: number;
-// class?: string;
-
 ipcMain.handle("createHabit", async (_, args: HabitArgs) => {
     if (!args.habit || !args.margin) return { error: "Please fill out the form properly" };
 
