@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { NoteModel, NoteArgs } from "../interfaces";
+import { NoteModel, NoteArgs } from "../../interfaces";
 import { getId, formatDateTime } from "../utils";
 import { getNotes, createNote, updateNote, deleteNote } from "../services";
 import dayjs from "dayjs";
@@ -27,6 +27,7 @@ ipcMain.handle("createNote", async (_, args: NoteArgs) => {
 ipcMain.handle("getNotes", async () => {
     try {
         const data = await getNotes();
+        data.sort((a, b) => b.timestamp - a.timestamp);
         return { data };
     } catch (error) {
         console.log(error);
@@ -39,6 +40,7 @@ ipcMain.handle("updateNote", async (_, args: NoteModel) => {
 
     try {
         const data = await updateNote(props);
+        data.sort((a, b) => b.timestamp - a.timestamp);
         return { info: `Updated note ${props.title}`, data };
     } catch (error) {
         console.log(error);

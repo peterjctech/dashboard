@@ -3,13 +3,7 @@ const advancedFormat = require("dayjs/plugin/advancedFormat");
 dayjs.extend(advancedFormat);
 
 const formatDate = (date) => {
-    return date.format("dddd, Do MMMM, YYYY @ HH:mm");
+    return date.format("dddd, D MMMM, YYYY");
 };
 
-const now = dayjs();
-
-const endOfDay = now.endOf("day").unix();
-const weekFromNow = now.add(7, "day").unix();
-
-console.log(endOfDay);
-console.log(weekFromNow);
+console.log(dayjs().format("D-MMM-YYYY"));

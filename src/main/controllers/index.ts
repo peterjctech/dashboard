@@ -7,3 +7,5 @@ export * from "./quoteControls";
 export * from "./shortcutControls";
 export * from "./ticketControls";
 export * from "./noteControls";
+export * from "./eventControls";
+export * from "./goalControls";

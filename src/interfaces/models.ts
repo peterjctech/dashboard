@@ -32,12 +32,13 @@ export interface TicketModel {
 export interface EventModel {
     event_id: string;
     event: string;
+    description: string;
     timestamp: number;
     date: string;
     category_id: string;
     category: string;
     class: string;
-    status: "Passed" | "Today" | "Upcoming" | null;
+    status_class?: string;
 }
 
 export interface WorkoutModel {
@@ -59,6 +60,7 @@ export interface GoalModel {
     created_timestamp: number;
     created_at: string;
     status: "Passed" | "Today" | "Upcoming" | null;
+    class: string;
 }
 
 export interface ShortcutModel {

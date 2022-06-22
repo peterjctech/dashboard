@@ -5,8 +5,18 @@
     import { IconButton } from "@components";
 
     const props = defineProps({
-        note: Object as PropType<NoteModel>,
+        note: {
+            type: Object as PropType<NoteModel>,
+            default: {
+                note_id: "",
+                title: "",
+                note: "",
+                updated_at: "",
+                timestamp: 0,
+            },
+        },
     });
+    const emit = defineEmits(["update"]);
 
     const data: any = ref({
         note_id: "",
@@ -26,8 +36,15 @@
     );
 
     const edit = () => {
+        const { note_id, title, note, updated_at, timestamp } = props.note;
+
         isEdit.value = true;
-        data.value = props.note;
+        data.value = { note_id, title, note, updated_at, timestamp };
+    };
+
+    const save = () => {
+        isEdit.value = false;
+        emit("update", data.value);
     };
 </script>
 
@@ -35,8 +52,8 @@
     <div v-if="note?.note_id" class="note">
         <div v-if="isEdit" class="note__edit">
             <Input v-model:value="data.title" class="note__input" />
-            <Input v-model:value="data.note" type="textarea" class="note__input" />
-            <IconButton type="success" class="note__icon">
+            <Input v-model:value="data.note" type="textarea" :rows="30" class="note__input" />
+            <IconButton @click="save" type="success" class="note__icon">
                 <ArrowForwardCircle />
             </IconButton>
         </div>
@@ -64,6 +81,7 @@
             p {
                 white-space: pre-wrap;
                 color: $neutral-light;
+                font-size: 1.5rem;
             }
         }
 

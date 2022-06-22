@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
-import { getId, openDB } from "../utils";
-import { TicketCategoryArgs, TicketCategoryModel } from "../interfaces";
+import { getId } from "../utils";
+import { TicketCategoryArgs, TicketCategoryModel } from "../../interfaces";
+import { createTicketCategory, getTicketCategories, updateTicketCategory, deleteTicketCategory } from "../services";
 
 ipcMain.handle("createTicketCategory", async (_, args: TicketCategoryArgs) => {
     if (!args.category) return { error: "Please fill out the form properly" };
@@ -12,14 +13,8 @@ ipcMain.handle("createTicketCategory", async (_, args: TicketCategoryArgs) => {
     };
 
     try {
-        const db = await openDB();
-        await db.run("INSERT INTO ticket_categories (category_id, category, class) VALUES (?, ?, ?)", [
-            props.category_id,
-            props.category,
-            props.class,
-        ]);
-
-        return { success: `Created ticket category ${props.category}`, data: props };
+        const data = await createTicketCategory(props);
+        return { success: `Created ticket category ${props.category}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to create ticket category" };
@@ -28,9 +23,7 @@ ipcMain.handle("createTicketCategory", async (_, args: TicketCategoryArgs) => {
 
 ipcMain.handle("getTicketCategories", async () => {
     try {
-        const db = await openDB();
-        const data = await db.all("SELECT * FROM ticket_categories");
-
+        const data = await getTicketCategories();
         return { data };
     } catch (error) {
         console.log(error);
@@ -40,13 +33,8 @@ ipcMain.handle("getTicketCategories", async () => {
 
 ipcMain.handle("updateTicketCategory", async (_, args: TicketCategoryModel) => {
     try {
-        const db = await openDB();
-        await db.run("UPDATE ticket_categories SET category = ?, class = ? WHERE category_id = ?", [
-            args.category,
-            args.class,
-            args.category_id,
-        ]);
-        return { info: `Updated category ${args.category}`, data: args };
+        const data = await updateTicketCategory(args);
+        return { info: `Updated category ${args.category}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to update ticket category" };
@@ -55,14 +43,8 @@ ipcMain.handle("updateTicketCategory", async (_, args: TicketCategoryModel) => {
 
 ipcMain.handle("deleteTicketCategory", async (_, args: TicketCategoryModel) => {
     try {
-        const db = await openDB();
-        const tickets = await db.all("SELECT * FROM tickets WHERE category_id = ?", args.category_id);
-        if (tickets.length > 0) {
-            return { error: "Delete all tickets in category first!" };
-        }
-        await db.run("DELETE FROM ticket_categories WHERE category_id = ?", args.category_id);
-
-        return { info: `Deleted ticket category ${args.category}`, data: args.category_id };
+        const data = await deleteTicketCategory(args);
+        return { info: `Deleted ticket category ${args.category}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to delete ticket category" };

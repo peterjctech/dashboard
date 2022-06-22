@@ -1,29 +1,38 @@
 export interface TicketCategoryArgs {
     category: string;
-    class?: string;
+    class: string;
 }
 
 export interface EventCategoryArgs {
     category: string;
-    class?: string;
+    class: string;
 }
 
 export interface ActivityArgs {
     activity: string;
     type: "Timed" | "Duration" | "Sets" | "Count";
-    class?: string;
+    class: string;
 }
 
 export interface TicketArgs {
     ticket: string;
-    deadline?: number;
-    category_id?: string;
+    deadline: number;
+    category_id: string;
 }
 
 export interface EventArgs {
     event: string;
+    description: string;
     date: number;
-    category_id?: string;
+    hour: number;
+    minute: number;
+    category_id: string;
+}
+
+export interface RescheduleEventArgs {
+    event_id: string;
+    event: string;
+    new_date: number;
 }
 
 export interface WorkoutArgs {
@@ -34,26 +43,26 @@ export interface WorkoutArgs {
 
 export interface GoalArgs {
     goal: string;
-    deadline?: number | "Weekly" | "Monthly" | "Quarterly" | "Yearly";
+    deadline: number | "Weekly" | "Monthly" | "Quarterly" | "Yearly";
 }
 
 export interface ShortcutArgs {
     shortcut: string;
     title: string;
     type: "Link" | "Application" | "Search";
-    icon?: string;
+    icon: string;
 }
 
 export interface ReminderArgs {
     reminder: string;
-    absolute?: number;
-    relative_number?: number;
-    relative_unit?: "minutes" | "hours" | "days";
+    absolute: number;
+    relative_number: number;
+    relative_unit: "minutes" | "hours" | "days";
 }
 
 export interface AchievementArgs {
     achievement: string;
-    date?: number;
+    date: number;
     class: string;
 }
 
@@ -65,10 +74,9 @@ export interface NoteArgs {
 export interface HabitArgs {
     habit: string;
     margin: number;
-    class?: string;
+    class: string;
 }
 
 export interface QuoteArgs {
     quote: string;
-    image?: string;
 }

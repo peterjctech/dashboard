@@ -1,6 +1,7 @@
 import { ipcMain } from "electron";
-import { getId, openDB, formatDate } from "../utils";
-import { HabitArgs, HabitModel } from "../interfaces";
+import { getId, formatDate } from "../utils";
+import { HabitArgs, HabitModel } from "../../interfaces";
+import { createHabit, getHabits, updateHabit, deleteHabit } from "../services";
 import dayjs from "dayjs";
 
 ipcMain.handle("createHabit", async (_, args: HabitArgs) => {
@@ -21,22 +22,8 @@ ipcMain.handle("createHabit", async (_, args: HabitArgs) => {
     };
 
     try {
-        const db = await openDB();
-        await db.run(
-            "INSERT INTO habits (habit_id, habit, margin, last_completed, last_broken, timestamp, class, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-            [
-                props.habit_id,
-                props.habit,
-                props.margin,
-                props.last_completed,
-                props.last_broken,
-                props.timestamp,
-                props.class,
-                props.created_at,
-            ]
-        );
-
-        return { success: `Created habit ${props.habit}`, data: props };
+        const data = await createHabit(props);
+        return { success: `Created habit ${props.habit}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to create habit" };
@@ -45,9 +32,7 @@ ipcMain.handle("createHabit", async (_, args: HabitArgs) => {
 
 ipcMain.handle("getHabits", async () => {
     try {
-        const db = await openDB();
-        const data = await db.all("SELECT * FROM habits");
-
+        const data = await getHabits();
         return { data };
     } catch (error) {
         console.log(error);
@@ -57,14 +42,8 @@ ipcMain.handle("getHabits", async () => {
 
 ipcMain.handle("updateHabit", async (_, args: HabitModel) => {
     try {
-        const db = await openDB();
-        await db.run("UPDATE habits SET habit = ?, margin = ?, class = ? WHERE habit_id = ?", [
-            args.habit,
-            args.margin,
-            args.class,
-            args.habit_id,
-        ]);
-        return { info: `Updated habit ${args.habit}`, data: args };
+        const data = await updateHabit(args);
+        return { info: `Updated habit ${args.habit}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to update habit" };
@@ -73,10 +52,8 @@ ipcMain.handle("updateHabit", async (_, args: HabitModel) => {
 
 ipcMain.handle("deleteHabit", async (_, args: HabitModel) => {
     try {
-        const db = await openDB();
-        await db.run("DELETE FROM habits WHERE habit_id = ?", args.habit_id);
-
-        return { info: `Deleted habit ${args.habit}`, data: args.habit_id };
+        const data = await deleteHabit(args);
+        return { info: `Deleted habit ${args.habit}`, data };
     } catch (error) {
         console.log(error);
         return { error: "Failed to delete habit" };

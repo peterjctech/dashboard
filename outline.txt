@@ -29,7 +29,4 @@ AchievementsPage
     achievements
 PlannerPage
     events
-    goals
     habits
-NotesPage
-    notes

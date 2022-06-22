@@ -6,7 +6,7 @@
         common: {
             primaryColorPressed: "#8a2be2",
             primaryColorHover: "#a155e7",
-            primaryColor: "#9540e4",
+            primaryColor: "#c699f0",
         },
         DataTable: {
             tdTextColor: "black",

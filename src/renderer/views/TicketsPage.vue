@@ -27,7 +27,6 @@
         const response = await invoke("createTicket", args);
         if (response) tickets.value = response;
     };
-
     const toggleTicket = async (args: TicketArgs) => {
         const response = await invoke("toggleTicket", args);
         if (response) {
@@ -41,8 +40,8 @@
         tickets.value = tickets.value.filter((obj: TicketModel) => obj.ticket_id !== response);
     };
 
-    watch(filter, (filter) => {
-        switch (filter) {
+    watch([filter, tickets], () => {
+        switch (filter.value) {
             case -2:
                 filteredTickets.value = tickets.value.filter((obj: TicketModel) => obj.status === "Passed");
                 break;
@@ -60,7 +59,7 @@
                 break;
             default:
                 filteredTickets.value = tickets.value.filter((obj: TicketModel) => {
-                    return obj.category_id === filter;
+                    return obj.category_id === filter.value;
                 });
                 break;
         }
@@ -70,7 +69,9 @@
 <template>
     <main class="tickets-page">
         <section>
-            <h5 class="count">{{ filteredTickets.length }} tickets remaining</h5>
+            <h5 class="count">
+                {{ filteredTickets.length }} {{ filteredTickets.length === 1 ? "ticket" : "tickets" }} remaining
+            </h5>
             <div class="filters">
                 <Button @click="filter = -2" type="warning">Deadline Passed</Button>
                 <Button @click="filter = -1" type="success">Deadline Today</Button>

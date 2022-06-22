@@ -3,7 +3,7 @@
     import { NoteModel } from "@interfaces";
     import { NModal as Modal, NEllipsis as Ellipsis } from "naive-ui";
     import { IconButton } from "@components";
-    import { Pencil, Trash, Add } from "@vicons/ionicons5";
+    import { Trash, Add } from "@vicons/ionicons5";
 
     defineProps({
         notes: Array as PropType<NoteModel[]>,
@@ -18,24 +18,25 @@
 </script>
 
 <template>
-    <div class="notes-view">
-        <h1 class="notes-view__title">Notes</h1>
-        <IconButton @click="showModal = true" type="success" class="notes-view__add bordered">
+    <div class="notes">
+        <h1 class="notes__title">Notes</h1>
+        <IconButton @click="showModal = true" type="success" class="notes__add bordered">
             <Add />
         </IconButton>
-        <div class="notes-view__notes">
-            <div v-for="note in notes" class="notes-view__note">
-                <Ellipsis style="max-width: 400px" class="notes-view__info">
-                    {{ note.title }} ({{ note.updated_at }})
-                </Ellipsis>
-                <section>
-                    <IconButton type="warning" @click="$emit('select', note)">
-                        <Pencil />
-                    </IconButton>
-                    <IconButton type="error" @click="$emit('delete', note)">
-                        <Trash />
-                    </IconButton>
-                </section>
+        <div class="notes__notes">
+            <div v-for="note in notes" class="notes__note">
+                <div @click="$emit('select', note)" class="notes__preview">
+                    <Ellipsis style="max-width: 400px" class="notes__info">
+                        {{ note.title }}
+                    </Ellipsis>
+                    <p>Last updated: {{ note.updated_at }}</p>
+                    <Ellipsis style="max-width: 400px" class="notes__text" :line-clamp="2">
+                        {{ note.note }}
+                    </Ellipsis>
+                </div>
+                <IconButton type="error" @click="$emit('delete', note)" class="notes__delete">
+                    <Trash />
+                </IconButton>
             </div>
         </div>
         <Modal v-model:show="showModal" title="New Note" preset="card" class="form-modal" segmented>
@@ -51,7 +52,7 @@
 </template>
 
 <style lang="scss">
-    .notes-view {
+    .notes {
         position: relative;
 
         &__note {
@@ -59,25 +60,18 @@
             color: $neutral-light;
             margin: 1rem;
             padding: 1rem;
-            display: flex;
-            justify-content: space-between;
             border-radius: 10px;
+            position: relative;
+        }
 
-            section {
-                display: flex;
-
-                > * {
-                    margin: 0.3rem;
-                }
-            }
+        &__preview {
+            cursor: pointer;
         }
 
         &__info {
-            align-self: center;
-
             span {
                 font-family: $fancy;
-                font-size: 2rem;
+                font-size: 3rem;
             }
         }
 
@@ -91,6 +85,24 @@
             font-family: $fancy;
             color: $neutral-light;
             margin-left: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        &__text {
+            font-size: 1.5rem;
+            white-space: pre-wrap;
+        }
+
+        &__delete {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 9;
+        }
+
+        p {
+            color: $neutral;
+            margin-bottom: 1rem;
         }
     }
 </style>

@@ -1,16 +1,18 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { FocusedTickets } from "@domain";
+</script>
 
 <template>
     <main class="home-page">
-        <h1>Home page is currently under construction...</h1>
+        <FocusedTickets />
     </main>
 </template>
 
 <style lang="scss">
     .home-page {
-        h1 {
-            color: white;
-            font-family: $fancy;
-        }
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        gap: 2rem;
     }
 </style>

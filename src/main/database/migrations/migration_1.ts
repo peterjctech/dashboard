@@ -15,7 +15,7 @@ export const migration_1 = async () => {
             "CREATE TABLE tickets (ticket_id TEXT PRIMARY KEY, ticket TEXT, is_focused INTEGER, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES ticket_categories(category_id))"
         );
         await db.exec(
-            "CREATE TABLE events (event_id TEXT PRIMARY KEY, event TEXT, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES event_categories(category_id))"
+            "CREATE TABLE events (event_id TEXT PRIMARY KEY, event TEXT, description TEXT, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES event_categories(category_id))"
         );
         await db.exec(
             "CREATE TABLE workouts (workout_id TEXT PRIMARY KEY, workout TEXT, timestamp INTEGER, date TEXT, activity_id TEXT REFERENCES activities(activity_id))"

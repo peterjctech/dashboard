@@ -1,25 +1,17 @@
 <script setup lang="ts">
-    import { h, PropType, ref, onMounted } from "vue";
+    import { h, ref, onMounted } from "vue";
     import { QuoteModel } from "@interfaces";
     import { IconButton } from "@components";
-    import { Pencil, Trash, ArchiveOutline } from "@vicons/ionicons5";
+    import { Pencil, Trash } from "@vicons/ionicons5";
     import { invoke } from "@helpers";
-    import {
-        NUpload as Upload,
-        NUploadDragger as UploadDragger,
-        UploadCustomRequestOptions,
-        UploadInst,
-    } from "naive-ui";
 
     const quotes: any = ref();
     const quoteData: any = ref({
         quote: "",
-        image: "",
     });
     const selectedQuote: any = ref({
         quote_id: "",
         quote: "",
-        image: "",
     });
 
     onMounted(async () => {
@@ -42,17 +34,6 @@
 
     const columns = [
         {
-            title: "Image",
-            key: "image",
-            render(row: QuoteModel) {
-                return h("img", {
-                    src: row.image ? row.image : "../../assets/images/default-quote.jpg",
-                    class: "sized-image",
-                });
-            },
-            width: 120,
-        },
-        {
             title: "Quote",
             key: "quote",
         },
@@ -67,7 +48,6 @@
                             selectedQuote.value = {
                                 quote_id: row.quote_id,
                                 quote: row.quote,
-                                image: "",
                             };
                         },
                         type: "warning",
@@ -103,15 +83,6 @@
         <h4>New Quote</h4>
         <h6>Quote</h6>
         <Input v-model:value="quoteData.quote" />
-        <h6>Image (optional)</h6>
-        <Upload :max="1" :custom-request="({file}: UploadCustomRequestOptions) => (quoteData.image = file.file?.path)">
-            <UploadDragger>
-                <Icon size="48">
-                    <ArchiveOutline />
-                </Icon>
-                <p style="font-size: 16px">Click or drag a file to this area to upload</p>
-            </UploadDragger>
-        </Upload>
         <Button @click="createQuote" type="success" class="form__button">Submit</Button>
     </div>
     <DataTable :data="quotes" :columns="columns" row-class-name="light" flex-height />
@@ -119,19 +90,6 @@
         <h4>{{ selectedQuote.quote_id ? "Update Quote" : "Select a quote to update" }}</h4>
         <h6>Quote</h6>
         <Input v-model:value="selectedQuote.quote" />
-        <h6>New Image</h6>
-        <Upload
-            :max="1"
-            :custom-request="({file}: UploadCustomRequestOptions) => (selectedQuote.image = file.file?.path)"
-            :disabled="selectedQuote.quote_id ? false : true"
-        >
-            <UploadDragger>
-                <Icon size="48">
-                    <ArchiveOutline />
-                </Icon>
-                <p style="font-size: 16px">Click or drag a file to this area to upload</p>
-            </UploadDragger>
-        </Upload>
         <Button
             @click="updateQuote"
             type="success"

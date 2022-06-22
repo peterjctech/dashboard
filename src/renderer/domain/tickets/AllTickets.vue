@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { h, PropType, render } from "vue";
+    import { h, PropType } from "vue";
     import { TicketModel } from "@interfaces";
     import { IconButton } from "@components";
     import { Trash, Eye, EyeOff } from "@vicons/ionicons5";

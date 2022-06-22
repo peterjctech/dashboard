@@ -1,3 +1,12 @@
+$vt-color-info: #8acbec;
+$vt-text-color-info: black;
+$vt-color-success: #7fe7c4;
+$vt-text-color-success: black;
+$vt-color-warning: #f2c97d;
+$vt-text-color-warning: black;
+$vt-color-error: #e98b8b;
+$vt-text-color-error: black;
+
 @import "vue-toastification/src/scss/_variables";
 @import "vue-toastification/src/scss/_toastContainer";
 @import "vue-toastification/src/scss/_toast";

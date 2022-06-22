@@ -1,3 +1,5 @@
+import FocusedTickets from "./FocusedTickets.vue";
+
 import ActivitiesConfig from "./settings/ActivitiesConfig.vue";
 import EventCategoriesConfig from "./settings/EventCategoriesConfig.vue";
 import HabitsConfig from "./settings/HabitsConfig.vue";
@@ -8,8 +10,13 @@ import TicketCategoriesConfig from "./settings/TicketCategoriesConfig.vue";
 import AllTickets from "./tickets/AllTickets.vue";
 import TicketForm from "./tickets/TicketForm.vue";
 
-import NotesView from "./notes/NotesView.vue";
+import Notes from "./notes/Notes.vue";
 import Note from "./notes/Note.vue";
+
+import PlannerForm from "./planner/PlannerForm.vue";
+import Habits from "./planner/Habits.vue";
+import Goals from "./planner/Goals.vue";
+import Schedule from "./planner/Schedule.vue";
 
 export {
     ActivitiesConfig,
@@ -20,6 +27,11 @@ export {
     TicketCategoriesConfig,
     AllTickets,
     TicketForm,
-    NotesView,
+    Notes,
     Note,
+    PlannerForm,
+    Habits,
+    Goals,
+    Schedule,
+    FocusedTickets,
 };
