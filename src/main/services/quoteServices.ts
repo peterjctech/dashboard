@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { QuoteProps, QuoteModel } from "../../interfaces";
+import { QuoteProps, QuoteModel } from "../interfaces";
 
 export const getQuotes = async () => {
     const db = await openDB();

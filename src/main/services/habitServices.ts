@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { HabitProps, HabitModel } from "../../interfaces";
+import { HabitProps, HabitModel } from "../interfaces";
 
 export const getHabits = async () => {
     const db = await openDB();

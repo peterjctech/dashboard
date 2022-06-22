@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import quarterOfYear from "dayjs/plugin/quarterOfYear";
 import { ipcMain } from "electron";
 import { getId, formatDate, formatShortDate } from "../utils";
-import { GoalArgs, GoalModel } from "../../interfaces";
+import { GoalArgs, GoalModel } from "../interfaces";
 import { createGoal, getGoals, deleteGoal } from "../services";
 dayjs.extend(quarterOfYear);
 

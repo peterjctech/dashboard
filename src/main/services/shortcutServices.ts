@@ -1,6 +1,6 @@
 import { openDB } from "../utils";
 import { retrieveImage } from "../utils";
-import { ShortcutProps, ShortcutModel } from "../../interfaces";
+import { ShortcutProps, ShortcutModel } from "../interfaces";
 
 export const getShortcuts = async () => {
     const db = await openDB();

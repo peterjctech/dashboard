@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { NoteProps, NoteModel } from "../../interfaces";
+import { NoteProps, NoteModel } from "../interfaces";
 
 export const getNotes = async () => {
     const db = await openDB();

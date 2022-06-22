@@ -1,4 +1,4 @@
-import { ActivityModel, ActivityProps } from "../../interfaces";
+import { ActivityModel, ActivityProps } from "../interfaces";
 import { openDB } from "../utils";
 
 export const getActivities = async () => {

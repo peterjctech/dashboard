@@ -1,9 +1,17 @@
-const dayjs = require("dayjs");
-const advancedFormat = require("dayjs/plugin/advancedFormat");
-dayjs.extend(advancedFormat);
+import {
+    ActivityProps,
+    EventCategoryProps,
+    GoalProps,
+    NoteProps,
+    EventProps,
+    HabitProps,
+    QuoteProps,
+    TicketProps,
+    WorkoutProps,
+    ReminderProps,
+    ShortcutProps,
+    AchievementProps,
+    TicketCategoryProps,
+} from "./interfaces";
 
-const formatDate = (date) => {
-    return date.format("dddd, D MMMM, YYYY");
-};
-
-console.log(dayjs().format("D-MMM-YYYY"));
+// console.log(ActivityProps);

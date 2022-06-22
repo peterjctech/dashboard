@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { EventCategoryProps, EventCategoryModel } from "../../interfaces";
+import { EventCategoryProps, EventCategoryModel } from "../interfaces";
 
 export const getEventCategories = async () => {
     const db = await openDB();

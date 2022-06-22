@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId, openDB, addImage, retrieveImage, removeImage } from "../utils";
-import { ShortcutArgs, ShortcutModel } from "../../interfaces";
+import { ShortcutArgs, ShortcutModel } from "../interfaces";
 import { createShortcut, getShortcuts, updateShortcut, deleteShortcut } from "../services";
 
 ipcMain.handle("createShortcut", async (_, args: ShortcutArgs) => {

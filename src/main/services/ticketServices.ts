@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { openDB } from "../utils";
-import { TicketProps, TicketModel } from "../../interfaces";
+import { TicketProps, TicketModel } from "../interfaces";
 
 const parseTicketData = (tickets: TicketModel[]) => {
     const currentTime = dayjs().unix();

@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId } from "../utils";
-import { TicketCategoryArgs, TicketCategoryModel } from "../../interfaces";
+import { TicketCategoryArgs, TicketCategoryModel } from "../interfaces";
 import { createTicketCategory, getTicketCategories, updateTicketCategory, deleteTicketCategory } from "../services";
 
 ipcMain.handle("createTicketCategory", async (_, args: TicketCategoryArgs) => {

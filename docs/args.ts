@@ -10,7 +10,7 @@ export interface EventCategoryArgs {
 
 export interface ActivityArgs {
     activity: string;
-    type: "Timed" | "Duration" | "Sets" | "Count";
+    type: "Timed" | "Duration" | "Count";
     class: string;
 }
 
@@ -36,7 +36,7 @@ export interface RescheduleEventArgs {
 }
 
 export interface WorkoutArgs {
-    workout: string;
+    workout: string | number;
     date: number;
     activity_id: string;
 }

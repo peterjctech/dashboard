@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { openDB } from "../utils";
-import { EventProps, EventModel, RescheduleEventProps } from "../../interfaces";
+import { EventProps, EventModel, RescheduleEventProps } from "../interfaces";
 
 export const getEvents = async () => {
     const db = await openDB();

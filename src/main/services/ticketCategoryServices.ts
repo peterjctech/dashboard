@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { TicketCategoryProps, TicketCategoryModel } from "../../interfaces";
+import { TicketCategoryProps, TicketCategoryModel } from "../interfaces";
 
 export const getTicketCategories = async () => {
     const db = await openDB();

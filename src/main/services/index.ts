@@ -8,3 +8,6 @@ export * from "./ticketCategoryServices";
 export * from "./ticketServices";
 export * from "./goalServices";
 export * from "./eventServices";
+export * from "./workoutServices";
+export * from "./reminderServices";
+export * from "./achievementServices";

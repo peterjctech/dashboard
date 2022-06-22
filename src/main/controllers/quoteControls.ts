@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId } from "../utils";
-import { QuoteArgs, QuoteModel } from "../../interfaces";
+import { QuoteArgs, QuoteModel } from "../interfaces";
 import { createQuote, getQuotes, updateQuote, deleteQuote } from "../services";
 
 ipcMain.handle("createQuote", async (_, args: QuoteArgs) => {

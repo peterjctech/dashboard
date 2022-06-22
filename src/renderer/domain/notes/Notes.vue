@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { h, ref, PropType } from "vue";
     import { NoteModel } from "@interfaces";
-    import { NModal as Modal, NEllipsis as Ellipsis } from "naive-ui";
+    import { NScrollbar, NModal as Modal, NEllipsis as Ellipsis } from "naive-ui";
     import { IconButton } from "@components";
     import { Trash, Add } from "@vicons/ionicons5";
 
@@ -19,26 +19,28 @@
 
 <template>
     <div class="notes">
-        <h1 class="notes__title">Notes</h1>
-        <IconButton @click="showModal = true" type="success" class="notes__add bordered">
-            <Add />
-        </IconButton>
-        <div class="notes__notes">
-            <div v-for="note in notes" class="notes__note">
-                <div @click="$emit('select', note)" class="notes__preview">
-                    <Ellipsis style="max-width: 400px" class="notes__info">
-                        {{ note.title }}
-                    </Ellipsis>
-                    <p>Last updated: {{ note.updated_at }}</p>
-                    <Ellipsis style="max-width: 400px" class="notes__text" :line-clamp="2">
-                        {{ note.note }}
-                    </Ellipsis>
+        <NScrollbar>
+            <h1 class="notes__title">Notes</h1>
+            <IconButton @click="showModal = true" type="success" class="notes__add bordered">
+                <Add />
+            </IconButton>
+            <div class="notes__notes">
+                <div v-for="note in notes" class="notes__note">
+                    <div @click="$emit('select', note)" class="notes__preview">
+                        <Ellipsis style="max-width: 400px" class="notes__info" :tooltip="false">
+                            {{ note.title }}
+                        </Ellipsis>
+                        <p>Last updated: {{ note.updated_at }}</p>
+                        <Ellipsis style="max-width: 400px" class="notes__text" :line-clamp="2" :tooltip="false">
+                            {{ note.note }}
+                        </Ellipsis>
+                    </div>
+                    <IconButton type="error" @click="$emit('delete', note)" class="notes__delete">
+                        <Trash />
+                    </IconButton>
                 </div>
-                <IconButton type="error" @click="$emit('delete', note)" class="notes__delete">
-                    <Trash />
-                </IconButton>
             </div>
-        </div>
+        </NScrollbar>
         <Modal v-model:show="showModal" title="New Note" preset="card" class="form-modal" segmented>
             <h6>Title</h6>
             <Input v-model:value="noteData.title" />
@@ -54,6 +56,8 @@
 <style lang="scss">
     .notes {
         position: relative;
+        height: calc(100vh - 8rem);
+        overflow: hidden;
 
         &__note {
             background-color: lighten($neutral-dark, 7%);

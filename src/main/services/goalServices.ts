@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { openDB } from "../utils";
-import { GoalProps, GoalModel } from "../../interfaces";
+import { GoalProps, GoalModel } from "../interfaces";
 
 export const getGoals = async () => {
     const db = await openDB();

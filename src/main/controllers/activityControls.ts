@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId } from "../utils";
-import { ActivityArgs, ActivityModel } from "../../interfaces";
+import { ActivityArgs, ActivityModel } from "../interfaces";
 import { getActivities, createActivity, updateActivity, deleteActivity } from "../services";
 
 ipcMain.handle("createActivity", async (_, args: ActivityArgs) => {

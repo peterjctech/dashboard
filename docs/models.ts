@@ -48,7 +48,7 @@ export interface WorkoutModel {
     date: string;
     activity_id: string;
     activity: string;
-    type: "Timed" | "Duration" | "Sets" | "Count";
+    type: "Timed" | "Duration" | "Count";
     class: string;
 }
 

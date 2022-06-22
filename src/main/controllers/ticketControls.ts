@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { ipcMain } from "electron";
 import { getId, formatDate } from "../utils";
-import { TicketArgs, TicketModel } from "../../interfaces";
+import { TicketArgs, TicketModel } from "../interfaces";
 import { createTicket, getTickets, getFocusedTickets, toggleTicket, deleteTicket } from "../services";
 
 ipcMain.handle("createTicket", async (_, args: TicketArgs) => {

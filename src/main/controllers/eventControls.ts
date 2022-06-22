@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import { ipcMain } from "electron";
-import { getId, formatDate } from "../utils";
-import { EventArgs, EventModel, RescheduleEventArgs } from "../../interfaces";
+import { getId, formatDateTime } from "../utils";
+import { EventArgs, EventModel, RescheduleEventArgs } from "../interfaces";
 import { createEvent, getEvents, getUpcomingEvents, updateEvent, rescheduleEvent, deleteEvent } from "../services";
 
 ipcMain.handle("createEvent", async (_, args: EventArgs) => {
@@ -14,7 +14,7 @@ ipcMain.handle("createEvent", async (_, args: EventArgs) => {
         event: args.event,
         description: args.description,
         timestamp: combinedDate / 1000,
-        date: formatDate(dayjs(combinedDate)),
+        date: formatDateTime(dayjs(combinedDate)),
         category_id: args.category_id,
     };
 
@@ -62,7 +62,7 @@ ipcMain.handle("rescheduleEvent", async (_, args: RescheduleEventArgs) => {
         event_id: args.event_id,
         event: args.event,
         timestamp: args.new_date / 1000,
-        date: formatDate(dayjs(args.new_date)),
+        date: formatDateTime(dayjs(args.new_date)),
     };
 
     try {

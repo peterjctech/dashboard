@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId, formatDate } from "../utils";
-import { HabitArgs, HabitModel } from "../../interfaces";
+import { HabitArgs, HabitModel } from "../interfaces";
 import { createHabit, getHabits, updateHabit, deleteHabit } from "../services";
 import dayjs from "dayjs";
 

@@ -25,7 +25,7 @@
         "pink",
         "light",
     ]);
-    const activityTypes = useFormat(["Timed", "Duration", "Sets", "Count"]);
+    const activityTypes = useFormat(["Timed", "Duration", "Count"]);
     const shortcutTypes = useFormat(["Application", "Link", "Search"]);
 </script>
 

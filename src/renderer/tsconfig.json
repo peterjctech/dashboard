@@ -14,7 +14,7 @@
             "@components": ["./components"],
             "@domain": ["./domain"],
             "@helpers": ["./helpers"],
-            "@interfaces": ["../interfaces"],
+            "@interfaces": ["./interfaces"],
             "@mixins": ["./mixins"],
             "@views": ["./views"]
         }

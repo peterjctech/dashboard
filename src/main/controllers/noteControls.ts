@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { NoteModel, NoteArgs } from "../../interfaces";
+import { NoteModel, NoteArgs } from "../interfaces";
 import { getId, formatDateTime } from "../utils";
 import { getNotes, createNote, updateNote, deleteNote } from "../services";
 import dayjs from "dayjs";

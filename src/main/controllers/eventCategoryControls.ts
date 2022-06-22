@@ -1,6 +1,6 @@
 import { ipcMain } from "electron";
 import { getId } from "../utils";
-import { EventCategoryArgs, EventCategoryModel } from "../../interfaces";
+import { EventCategoryArgs, EventCategoryModel } from "../interfaces";
 import { createEventCategory, getEventCategories, updateEventCategory, deleteEventCategory } from "../services";
 
 ipcMain.handle("createEventCategory", async (_, args: EventCategoryArgs) => {
