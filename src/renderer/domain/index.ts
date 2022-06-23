@@ -1,4 +1,6 @@
 import FocusedTickets from "./FocusedTickets.vue";
+import Shortcuts from "./Shortcuts.vue";
+import Clock from "./Clock.vue";
 
 import ActivitiesConfig from "./settings/ActivitiesConfig.vue";
 import EventCategoriesConfig from "./settings/EventCategoriesConfig.vue";
@@ -34,4 +36,6 @@ export {
     Goals,
     Schedule,
     FocusedTickets,
+    Shortcuts,
+    Clock,
 };

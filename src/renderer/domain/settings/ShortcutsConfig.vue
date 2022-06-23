@@ -31,7 +31,7 @@
     });
 
     onMounted(async () => {
-        shortcuts.value = await invoke("getShortcuts");
+        shortcuts.value = await invoke("getShortcuts", { object: false });
     });
 
     const createShortcut = async () => {

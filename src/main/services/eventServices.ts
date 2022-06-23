@@ -7,6 +7,7 @@ export const getEvents = async () => {
     const data = await db.all(
         "SELECT event_id, event, description, timestamp, date, category_id, category, class FROM events INNER JOIN event_categories USING (category_id)"
     );
+
     return data;
 };
 

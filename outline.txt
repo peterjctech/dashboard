@@ -16,13 +16,10 @@ Quotes: /settings, /home
 
 
 HomePage
-    tickets
     events
-    shortcuts
     reminders
     quotes
     weather
-    clock
 FitnessPage
     workouts
 AchievementsPage

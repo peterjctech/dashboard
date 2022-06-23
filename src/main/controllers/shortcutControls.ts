@@ -28,9 +28,9 @@ ipcMain.handle("createShortcut", async (_, args: ShortcutArgs) => {
     }
 });
 
-ipcMain.handle("getShortcuts", async () => {
+ipcMain.handle("getShortcuts", async (_, args) => {
     try {
-        const data = await getShortcuts();
+        const data = await getShortcuts(args);
         return { data };
     } catch (error) {
         console.log(error);

@@ -2,7 +2,7 @@
     import { ref, onMounted } from "vue";
     import { Habits, Goals, Schedule, PlannerForm } from "@domain";
     import { invoke } from "@helpers";
-    import { GoalArgs, GoalModel, EventArgs, EventCategoryModel } from "@interfaces";
+    import { GoalArgs, GoalModel, EventArgs, EventCategoryModel, EventModel } from "@interfaces";
     import { useFormat } from "@mixins";
 
     const eventCategories = ref();
@@ -32,6 +32,10 @@
         const response = await invoke("deleteGoal", args);
         goals.value = goals.value.filter((obj: GoalModel) => obj.goal_id !== response);
     };
+    const deleteEvent = async (args: GoalModel) => {
+        const response = await invoke("deleteEvent", args);
+        events.value = events.value.filter((obj: EventModel) => obj.event_id !== response);
+    };
 
     const presets = useFormat(["Weekly", "Monthly", "Quarterly", "Yearly"]);
 </script>
@@ -40,7 +44,7 @@
     <main class="planner-page">
         <Habits />
         <Goals :goals="goals" @delete="deleteGoal" />
-        <Schedule />
+        <Schedule :events="events" @delete="deleteEvent" />
         <PlannerForm :categories="eventCategories" :presets="presets" @goal="createGoal" @event="createEvent" />
     </main>
 </template>

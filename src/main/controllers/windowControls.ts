@@ -1,5 +1,5 @@
-import { ipcMain, BrowserWindow, dialog, app } from "electron";
-import { readFileSync } from "fs";
+import { ipcMain, BrowserWindow } from "electron";
+import { spawn } from "node:child_process";
 
 ipcMain.handle("minimizeWindow", () => {
     BrowserWindow.getFocusedWindow()?.minimize();
@@ -11,4 +11,8 @@ ipcMain.handle("maximizeWindow", () => {
 
 ipcMain.handle("closeWindow", () => {
     BrowserWindow.getFocusedWindow()?.close();
+});
+
+ipcMain.handle("openApplication", (_, args) => {
+    spawn(args.path);
 });

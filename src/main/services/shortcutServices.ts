@@ -2,15 +2,25 @@ import { openDB } from "../utils";
 import { retrieveImage } from "../utils";
 import { ShortcutProps, ShortcutModel } from "../interfaces";
 
-export const getShortcuts = async () => {
+export const getShortcuts = async (args) => {
     const db = await openDB();
     const shortcuts = await db.all("SELECT * FROM shortcuts");
 
-    const data = shortcuts.map((obj) => {
+    const obj = shortcuts.map((obj) => {
         const icon = retrieveImage(obj.shortcut_id);
         return { ...obj, icon };
     });
-    return data;
+
+    if (args.object) {
+        const data = {
+            apps: obj.filter((shortcut) => shortcut.type === "Application"),
+            links: obj.filter((shortcut) => shortcut.type === "Link"),
+            searches: obj.filter((shortcut) => shortcut.type === "Search"),
+        };
+        return data;
+    } else {
+        return obj;
+    }
 };
 
 export const createShortcut = async (props: ShortcutProps) => {

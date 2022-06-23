@@ -5,8 +5,7 @@ import { EventArgs, EventModel, RescheduleEventArgs } from "../interfaces";
 import { createEvent, getEvents, getUpcomingEvents, updateEvent, rescheduleEvent, deleteEvent } from "../services";
 
 ipcMain.handle("createEvent", async (_, args: EventArgs) => {
-    if (!args.event) return { error: "Please fill out the form properly" };
-
+    if (!args.event || !args.category_id) return { error: "Please fill out the form properly" };
     const combinedDate = args.date + args.minute * 60000 + args.hour * 3600000;
 
     const props = {
