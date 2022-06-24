@@ -87,7 +87,7 @@
         <h4>New Category</h4>
         <h6>Category</h6>
         <Input v-model:value="ticketCategoryData.category" />
-        <h6>Class (optional)</h6>
+        <h6>Color (optional)</h6>
         <Select v-model:value="ticketCategoryData.class" :options="classes" />
         <Button @click="createTicketCategory" type="success" class="form__button">Submit</Button>
     </div>

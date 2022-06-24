@@ -5,9 +5,11 @@ export const migration_1 = async () => {
         const db = await openDB();
         await db.get("PRAGMA foreign_keys = ON");
         await db.run("INSERT INTO meta (key, value) VALUES ('database_version', 0)");
+        await db.run("INSERT INTO meta (key, value) VALUES ('zip_code', 0)");
+        await db.run("INSERT INTO meta (key, value) VALUES ('latitude', 0)");
+        await db.run("INSERT INTO meta (key, value) VALUES ('longitude', 0)");
 
         await db.exec("CREATE TABLE ticket_categories (category_id TEXT PRIMARY KEY, category TEXT, class TEXT)");
-        await db.exec("CREATE TABLE event_categories (category_id TEXT PRIMARY KEY, category TEXT, class TEXT)");
         // type will be for graphing purposes (visualizing progress)
         await db.exec("CREATE TABLE activities (activity_id TEXT PRIMARY KEY, activity TEXT, type TEXT, class TEXT)");
 
@@ -15,10 +17,10 @@ export const migration_1 = async () => {
             "CREATE TABLE tickets (ticket_id TEXT PRIMARY KEY, ticket TEXT, is_focused INTEGER, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES ticket_categories(category_id))"
         );
         await db.exec(
-            "CREATE TABLE events (event_id TEXT PRIMARY KEY, event TEXT, description TEXT, timestamp INTEGER, date TEXT, category_id TEXT REFERENCES event_categories(category_id))"
+            "CREATE TABLE events (event_id TEXT PRIMARY KEY, event TEXT, description TEXT, timestamp INTEGER, date TEXT)"
         );
         await db.exec(
-            "CREATE TABLE workouts (workout_id TEXT PRIMARY KEY, workout TEXT, timestamp INTEGER, date TEXT, activity_id TEXT REFERENCES activities(activity_id))"
+            "CREATE TABLE workouts (workout_id TEXT PRIMARY KEY, workout TEXT, value BLOB, timestamp INTEGER, date TEXT, activity_id TEXT REFERENCES activities(activity_id))"
         );
 
         await db.exec(
@@ -28,10 +30,6 @@ export const migration_1 = async () => {
         await db.exec(
             "CREATE TABLE reminders (reminder_id TEXT PRIMARY KEY, reminder TEXT, timestamp INTEGER, time TEXT)"
         );
-        await db.exec(
-            "CREATE TABLE achievements (achievement_id TEXT PRIMARY KEY, achievement TEXT, timestamp INTEGER, date TEXT, class TEXT)"
-        );
-        // timestamp is the most recent out of last created or last updated, for sorting purposes
         await db.exec(
             "CREATE TABLE notes (note_id TEXT PRIMARY KEY, title TEXT, note TEXT, updated_at TEXT, timestamp INTEGER)"
         );

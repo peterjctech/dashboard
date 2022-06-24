@@ -1,7 +1,6 @@
 export * from "./windowControls";
 export * from "./activityControls";
 export * from "./ticketCategoryControls";
-export * from "./eventCategoryControls";
 export * from "./habitControls";
 export * from "./quoteControls";
 export * from "./shortcutControls";
@@ -9,3 +8,6 @@ export * from "./ticketControls";
 export * from "./noteControls";
 export * from "./eventControls";
 export * from "./goalControls";
+export * from "./workoutControls";
+export * from "./configControls";
+export * from "./reminderControls";

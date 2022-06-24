@@ -4,7 +4,7 @@ import { NoteProps, NoteModel } from "../interfaces";
 export const getNotes = async () => {
     const db = await openDB();
     const data = await db.all("SELECT * FROM notes");
-    data.sort((a, b) => a.timestamp - b.timestamp);
+    data.sort((a, b) => b.timestamp - a.timestamp);
     return data;
 };
 

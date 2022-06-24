@@ -2,7 +2,6 @@ import { faker } from "@faker-js/faker";
 import dayjs from "dayjs";
 import {
     createActivity,
-    createEventCategory,
     createGoal,
     createNote,
     createEvent,
@@ -11,7 +10,6 @@ import {
     createTicket,
     createWorkout,
     createShortcut,
-    createAchievement,
     createTicketCategory,
 } from "../services";
 import { formatDate, formatDateTime, formatShortDate, getId, addImage, openDB } from "../utils";
@@ -36,21 +34,32 @@ const fitness = [
         id: getId(),
         type: "Timed",
         activity: "Run a mile",
-        workouts: [282, 304, 334, 376],
+        workouts: ["4:42", "5:04", "5:34", "6:16"],
+        values: [282, 304, 334, 376],
         class: "red",
     },
     {
         id: getId(),
         type: "Duration",
         activity: "Jog",
-        workouts: [1200, 1500, 1800, 2400],
+        workouts: ["20:00", "25:00", "30:00", "35:00"],
+        values: [1200, 1500, 1800, 2100],
         class: "green",
     },
     {
         id: getId(),
         type: "Count",
         activity: "Consecutive Pushups",
-        workouts: [16, 20, 35, 41],
+        workouts: ["16", "20", "35", "41"],
+        values: [16, 20, 35, 41],
+        class: "pink",
+    },
+    {
+        id: getId(),
+        type: "General Workout",
+        activity: "Free weights",
+        workouts: ["3 x 12 x 20lbs", "4 x 8 x 80lbs", "10 x 10 x 10lbs", "7 x 7 x 50lbs"],
+        values: [null, null, null, null],
         class: "pink",
     },
 ];
@@ -67,13 +76,7 @@ export const seedDatabase = async () => {
     console.log("Seeding database...");
 
     const ticketCategoryIds: string[] = [];
-    const eventCategoryIds: string[] = [];
     const shortcutIds = [getId(), getId(), getId()];
-
-    const now = {
-        shortDate: formatShortDate(dayjs()),
-        timestamp: dayjs().unix(),
-    };
 
     await createShortcut({
         shortcut_id: shortcutIds[0],
@@ -112,8 +115,9 @@ export const seedDatabase = async () => {
             await createWorkout({
                 workout_id: getId(),
                 workout: obj.workouts[j],
+                value: obj.values[j],
                 timestamp: date.unix(),
-                date: formatDate(date),
+                date: dayjs(date).format("ddd-D-MMM-YYYY"),
                 activity_id: obj.id,
             });
         }
@@ -121,15 +125,7 @@ export const seedDatabase = async () => {
 
     for (let i = 0; i < 4; i++) {
         const ticketCategoryId = getId();
-        const eventCategoryId = getId();
         ticketCategoryIds.push(ticketCategoryId);
-        eventCategoryIds.push(eventCategoryId);
-
-        await createEventCategory({
-            category_id: eventCategoryId,
-            category: faker.commerce.productMaterial(),
-            class: pickRandomItem(classes),
-        });
 
         await createTicketCategory({
             category_id: ticketCategoryId,
@@ -139,7 +135,6 @@ export const seedDatabase = async () => {
     }
 
     for (let i = 0; i < 5; i++) {
-        const achievementDate = pickRandomDate(-90, 0);
         const now: any = dayjs();
         const habitCreation: any = pickRandomDate(-60, 0);
         const habitLastBroken = faker.date.between(habitCreation, now);
@@ -147,25 +142,17 @@ export const seedDatabase = async () => {
 
         await createQuote({
             quote_id: getId(),
-            quote: faker.lorem.sentence(),
+            quote: `"${faker.lorem.sentence()}"`,
         });
 
         await createHabit({
             habit_id: getId(),
             habit: faker.color.human(),
-            margin: faker.datatype.number({ max: 7 }),
+            margin: faker.datatype.number({ min: 1, max: 7 }),
             last_completed: dayjs(habitLastCompleted).unix(),
             last_broken: dayjs(habitLastBroken).unix(),
             created_at: formatDate(habitCreation),
             timestamp: habitCreation.unix(),
-            class: pickRandomItem(classes),
-        });
-
-        await createAchievement({
-            achievement_id: getId(),
-            achievement: faker.fake("Created awesome product: {{commerce.product}}!!!"),
-            timestamp: achievementDate.unix(),
-            date: formatDate(achievementDate),
             class: pickRandomItem(classes),
         });
     }
@@ -199,7 +186,6 @@ export const seedDatabase = async () => {
             description: faker.commerce.productDescription(),
             timestamp: eventDate.unix(),
             date: formatDateTime(eventDate),
-            category_id: pickRandomItem(eventCategoryIds),
         });
     }
 

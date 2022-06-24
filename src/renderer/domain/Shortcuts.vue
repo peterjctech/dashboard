@@ -84,6 +84,10 @@
 
 <style lang="scss">
     .shortcuts {
+        display: flex;
+        justify-content: space-around;
+        margin: auto 5rem;
+
         &__modal {
             width: 80rem;
 

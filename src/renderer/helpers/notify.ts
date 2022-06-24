@@ -8,3 +8,7 @@ export const toast = {
     warning: (message: string) => VueToastification.warning(message),
     error: (message: string) => VueToastification.error(message),
 };
+
+export const notify = {
+    notif: () => new Audio("../assets/audio/notif.mp3").play(),
+};

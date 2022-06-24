@@ -1,6 +1,14 @@
 <script setup lang="ts">
     import { NConfigProvider, darkTheme, GlobalThemeOverrides, NDialogProvider } from "naive-ui";
     import { Titlebar, Sidebar } from "@components";
+    import { useReminders } from "@store";
+    import { onMounted } from "vue";
+
+    const reminderStore = useReminders();
+
+    onMounted(async () => {
+        reminderStore.getReminders();
+    });
 
     const themeOverrides: GlobalThemeOverrides = {
         common: {

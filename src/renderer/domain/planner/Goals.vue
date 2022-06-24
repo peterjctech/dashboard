@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { h, PropType, render } from "vue";
+    import { h, PropType } from "vue";
     import { GoalModel } from "@interfaces";
     import { IconButton } from "@components";
     import { Trash } from "@vicons/ionicons5";
@@ -17,12 +17,12 @@
         {
             title: "Status",
             key: "status",
-            width: 120,
+            width: 90,
         },
         {
             title: "Deadline",
             key: "date",
-            width: 280,
+            width: 220,
         },
         {
             title: "Delete",

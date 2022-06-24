@@ -24,7 +24,7 @@ export const formatDate = (date: dayjs.Dayjs) => dayjs(date).format("dddd, Do MM
 
 export const formatShortDate = (date: dayjs.Dayjs) => dayjs(date).format("D-MMM-YYYY");
 
-export const formatDateTime = (date: dayjs.Dayjs) => dayjs(date).format("HH:mm, dddd, Do MMMM, YYYY");
+export const formatDateTime = (date: dayjs.Dayjs) => dayjs(date).format("HH:mm on dddd, Do MMMM, YYYY");
 
 export const imagesDir = (name?: string) => {
     let path = app.getPath("userData") + "/Images";

@@ -1,5 +1,4 @@
 export * from "./activityServices";
-export * from "./eventCategoryServices";
 export * from "./habitServices";
 export * from "./noteServices";
 export * from "./quoteServices";
@@ -10,4 +9,3 @@ export * from "./goalServices";
 export * from "./eventServices";
 export * from "./workoutServices";
 export * from "./reminderServices";
-export * from "./achievementServices";

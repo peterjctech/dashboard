@@ -4,12 +4,6 @@ export interface TicketCategoryModel {
     class: string;
 }
 
-export interface EventCategoryModel {
-    category_id: string;
-    category: string;
-    class: string;
-}
-
 export interface ActivityModel {
     activity_id: string;
     activity: string;
@@ -35,15 +29,13 @@ export interface EventModel {
     description: string;
     timestamp: number;
     date: string;
-    category_id: string;
-    category: string;
+    status: string;
     class: string;
-    status_class?: string;
 }
 
 export interface WorkoutModel {
     workout_id: string;
-    workout: string;
+    value: number;
     timestamp: number;
     date: string;
     activity_id: string;
@@ -78,14 +70,6 @@ export interface ReminderModel {
     time: string;
 }
 
-export interface AchievementModel {
-    achievement_id: string;
-    achievement: string;
-    timestamp: number;
-    date: string;
-    class: string;
-}
-
 export interface NoteModel {
     note_id: string;
     title: string;
@@ -108,5 +92,4 @@ export interface HabitModel {
 export interface QuoteModel {
     quote_id: string;
     quote: string;
-    image: string;
 }

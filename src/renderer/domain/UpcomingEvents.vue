@@ -1,9 +1,10 @@
 <script setup lang="ts">
-    import { h, PropType, ref } from "vue";
+    import { onMounted, h, PropType, ref } from "vue";
     import { EventModel } from "@interfaces";
     import { IconButton } from "@components";
     import { Trash, Eye } from "@vicons/ionicons5";
     import { NModal } from "naive-ui";
+    import { invoke } from "@helpers";
 
     const showModal = ref(false);
     const modalContent = ref<EventModel>({
@@ -15,11 +16,11 @@
         status: "",
         class: "",
     });
+    const events = ref();
 
-    defineProps({
-        events: Array as PropType<EventModel[]>,
+    onMounted(async () => {
+        events.value = await invoke("getUpcomingEvents");
     });
-    const emit = defineEmits(["delete"]);
 
     const columns = [
         {
@@ -52,13 +53,23 @@
         {
             title: "Date",
             key: "date",
-            width: 320,
+            width: 240,
         },
         {
             title: "Delete",
             key: "delete",
             render(row: EventModel) {
-                return h(IconButton, { onClick: () => emit("delete", row), type: "error" }, () => h(Trash));
+                return h(
+                    IconButton,
+                    {
+                        onClick: async () => {
+                            const response = await invoke("deleteEvent", row);
+                            events.value = events.value.filter((obj: EventModel) => obj.event_id !== response);
+                        },
+                        type: "error",
+                    },
+                    () => h(Trash)
+                );
             },
             width: 80,
         },

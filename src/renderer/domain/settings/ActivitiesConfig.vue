@@ -96,7 +96,7 @@
         <Input v-model:value="activityData.activity" />
         <h6>Type</h6>
         <Select v-model:value="activityData.type" :options="types" />
-        <h6>Class (optional)</h6>
+        <h6>Color (optional)</h6>
         <Select v-model:value="activityData.class" :options="classes" />
         <Button @click="createActivity" type="success" class="form__button">Submit</Button>
     </div>

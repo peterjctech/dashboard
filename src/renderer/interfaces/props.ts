@@ -4,12 +4,6 @@ export interface TicketCategoryProps {
     class: string;
 }
 
-export interface EventCategoryProps {
-    category_id: string;
-    category: string;
-    class: string;
-}
-
 export interface ActivityProps {
     activity_id: string;
     activity: string;
@@ -32,19 +26,11 @@ export interface EventProps {
     description: string;
     timestamp: number;
     date: string;
-    category_id: string;
-}
-
-export interface RescheduleEventProps {
-    event_id: string;
-    event: string;
-    timestamp: number;
-    date: string;
 }
 
 export interface WorkoutProps {
     workout_id: string;
-    workout: number;
+    value: number;
     timestamp: number;
     date: string;
     activity_id: string;
@@ -71,14 +57,6 @@ export interface ReminderProps {
     reminder: string;
     timestamp: number;
     time: string;
-}
-
-export interface AchievementProps {
-    achievement_id: string;
-    achievement: string;
-    timestamp: number;
-    date: string;
-    class: string;
 }
 
 export interface NoteProps {

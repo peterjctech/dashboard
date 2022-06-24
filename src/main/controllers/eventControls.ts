@@ -1,11 +1,11 @@
 import dayjs from "dayjs";
 import { ipcMain } from "electron";
 import { getId, formatDateTime } from "../utils";
-import { EventArgs, EventModel, RescheduleEventArgs } from "../interfaces";
-import { createEvent, getEvents, getUpcomingEvents, updateEvent, rescheduleEvent, deleteEvent } from "../services";
+import { EventArgs, EventModel } from "../interfaces";
+import { createEvent, getEvents, getUpcomingEvents, updateEvent, deleteEvent } from "../services";
 
 ipcMain.handle("createEvent", async (_, args: EventArgs) => {
-    if (!args.event || !args.category_id) return { error: "Please fill out the form properly" };
+    if (!args.event) return { error: "Please fill out the form properly" };
     const combinedDate = args.date + args.minute * 60000 + args.hour * 3600000;
 
     const props = {
@@ -14,7 +14,6 @@ ipcMain.handle("createEvent", async (_, args: EventArgs) => {
         description: args.description,
         timestamp: combinedDate / 1000,
         date: formatDateTime(dayjs(combinedDate)),
-        category_id: args.category_id,
     };
 
     try {
@@ -56,22 +55,22 @@ ipcMain.handle("updateEvent", async (_, args: EventModel) => {
     }
 });
 
-ipcMain.handle("rescheduleEvent", async (_, args: RescheduleEventArgs) => {
-    const props = {
-        event_id: args.event_id,
-        event: args.event,
-        timestamp: args.new_date / 1000,
-        date: formatDateTime(dayjs(args.new_date)),
-    };
+// ipcMain.handle("rescheduleEvent", async (_, args: RescheduleEventArgs) => {
+//     const props = {
+//         event_id: args.event_id,
+//         event: args.event,
+//         timestamp: args.new_date / 1000,
+//         date: formatDateTime(dayjs(args.new_date)),
+//     };
 
-    try {
-        const data = await rescheduleEvent(props);
-        return { info: `Rescheduled event ${args.event}`, data };
-    } catch (error) {
-        console.log(error);
-        return { error: "Failed to reschedule event" };
-    }
-});
+//     try {
+//         const data = await rescheduleEvent(props);
+//         return { info: `Rescheduled event ${args.event}`, data };
+//     } catch (error) {
+//         console.log(error);
+//         return { error: "Failed to reschedule event" };
+//     }
+// });
 
 ipcMain.handle("deleteEvent", async (_, args: EventModel) => {
     try {

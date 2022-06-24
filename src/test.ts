@@ -1,26 +1,17 @@
 const dayjs = require("dayjs");
-const { faker } = require("faker");
+const { faker } = require("@faker-js/faker");
 
-const pickRandomDate = (daysOne: number, daysTwo: number) => {
-    const firstDate: any = dayjs().add(daysOne, "day");
-    const secondDate: any = dayjs().add(daysTwo, "day");
-    return dayjs(faker.date.between(firstDate, secondDate));
-};
-const eventDate = pickRandomDate(-14, 90);
+interface SetReminderArgs {
+    hour: number;
+    minute: number;
+}
 
-const createEvent = (date: number) => {
-    const timestamp = date / 1000;
+const setReminder = (args: SetReminderArgs) => {
+    const currentHour = dayjs().hour();
+    const currentMinute = dayjs().minute();
 
-    console.log(timestamp);
-
-    const props = {
-        timestamp: date / 1000,
-        year: dayjs(date).year(),
-        month: dayjs(date).month() + 1,
-        day: dayjs(date).date(),
-    };
-
-    console.log(props);
+    console.log(currentHour);
+    console.log(currentMinute);
 };
 
-createEvent(1656568800000);
+setReminder({ hour: 5, minute: 30 });

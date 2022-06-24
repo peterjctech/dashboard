@@ -16,6 +16,7 @@
             "@helpers": ["./helpers"],
             "@interfaces": ["./interfaces"],
             "@mixins": ["./mixins"],
+            "@store": ["./store"],
             "@views": ["./views"]
         }
     },

@@ -3,16 +3,16 @@ import { openDB } from "../utils";
 import { TicketProps, TicketModel } from "../interfaces";
 
 const parseTicketData = (tickets: TicketModel[]) => {
-    const currentTime = dayjs().unix();
-    const endOfDay = dayjs().endOf("day").unix();
+    const endOfYesterday = dayjs().endOf("day").subtract(1, "day").unix();
+    const endOfToday = dayjs().endOf("day").unix();
 
     const data = tickets.map((obj) => {
         let status = "";
         let rowClass = obj.class;
-        if (currentTime > obj.timestamp) {
+        if (endOfYesterday > obj.timestamp) {
             status = "Passed";
             rowClass += " error";
-        } else if (endOfDay >= obj.timestamp) {
+        } else if (endOfToday >= obj.timestamp) {
             status = "Today";
             rowClass += " success";
         }

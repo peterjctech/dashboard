@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import { getId, openDB, addImage, retrieveImage, removeImage } from "../utils";
+import { getId, addImage, removeImage } from "../utils";
 import { ShortcutArgs, ShortcutModel } from "../interfaces";
 import { createShortcut, getShortcuts, updateShortcut, deleteShortcut } from "../services";
 

@@ -1,13 +1,8 @@
 <script setup lang="ts">
     import { ref, PropType } from "vue";
     import { NTabs as Tabs, NTabPane as TabPane, NDatePicker, NSwitch } from "naive-ui";
-    import { EventArgs, GoalArgs } from "@interfaces";
+    import { EventArgs } from "@interfaces";
     import dayjs from "dayjs";
-
-    // export interface GoalArgs {
-    //     goal: string;
-    //     deadline: number | "Weekly" | "Monthly" | "Quarterly" | "Yearly";
-    // }
 
     defineProps({
         categories: {
@@ -28,7 +23,6 @@
         date: dayjs().startOf("day").unix() * 1000,
         hour: 0,
         minute: 0,
-        category_id: "",
     });
     const goalData = ref({
         goal: "",
@@ -59,14 +53,11 @@
                         <InputNumber v-model:value="eventData.hour" :min="0" :max="23" />
                         <InputNumber v-model:value="eventData.minute" :min="0" :max="59" :step="15" />
                     </section>
-                    <h6>Category</h6>
-                    <Select v-model:value="eventData.category_id" :options="categories" />
                     <Button @click="$emit('event', eventData)" type="success" class="form__button">Submit</Button>
                 </div>
             </TabPane>
             <TabPane name="Goal">
                 <div class="form">
-                    <h4>New Goal</h4>
                     <h6>Goal</h6>
                     <Input v-model:value="goalData.goal" />
                     <h6>Use preset goal deadline?</h6>
@@ -82,11 +73,3 @@
         </Tabs>
     </Card>
 </template>
-
-<style lang="scss">
-    .component {
-        h1 {
-            color: white;
-        }
-    }
-</style>

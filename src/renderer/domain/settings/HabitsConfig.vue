@@ -105,7 +105,7 @@
         <Input v-model:value="habitData.habit" />
         <h6>Check-in Margin</h6>
         <InputNumber v-model:value="habitData.margin" />
-        <h6>Class (optional)</h6>
+        <h6>Color (optional)</h6>
         <Select v-model:value="habitData.class" :options="classes" />
         <Button @click="createHabit" type="success" class="form__button">Submit</Button>
     </div>

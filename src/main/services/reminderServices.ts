@@ -1,4 +1,4 @@
-import { ReminderProps } from "../interfaces";
+import { ReminderModel, ReminderProps } from "../interfaces";
 import { openDB } from "../utils";
 
 export const createReminder = async (props: ReminderProps) => {
@@ -11,4 +11,16 @@ export const createReminder = async (props: ReminderProps) => {
     ]);
 
     return props;
+};
+
+export const getReminders = async () => {
+    const db = await openDB();
+    const data = await db.all("SELECT * FROM reminders");
+    return data;
+};
+
+export const deleteReminder = async (args: ReminderModel) => {
+    const db = await openDB();
+    await db.run("DELETE FROM reminders WHERE reminder_id = ?", args.reminder_id);
+    return args.reminder_id;
 };

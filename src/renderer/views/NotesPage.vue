@@ -17,14 +17,16 @@
     const updateNote = async (note: NoteModel) => {
         const response = await invoke("updateNote", note);
         const currentId = selectedNote.value.note_id;
-        console.log(response);
         if (response) {
             notes.value = response;
             selectedNote.value = notes.value.find((obj: NoteModel) => obj.note_id === currentId);
         }
     };
-    const deleteNote = (note: NoteModel) => {
-        console.log(note);
+    const deleteNote = async (note: NoteModel) => {
+        const response = await invoke("deleteNote", note);
+        if (response) {
+            notes.value = notes.value.filter((obj: NoteModel) => obj.note_id !== response);
+        }
     };
 </script>
 

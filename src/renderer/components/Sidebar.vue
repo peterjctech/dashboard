@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { Home, Ticket, Settings, Barbell, Trophy, Pencil, Book } from "@vicons/ionicons5";
+    import { Home, Ticket, Settings, Barbell, Pencil, Book } from "@vicons/ionicons5";
     import { h } from "vue";
     import { Icon } from "@vicons/utils";
     import { RouterLink } from "vue-router";
@@ -24,10 +24,6 @@
         {
             route: "/fitness",
             icon: Barbell,
-        },
-        {
-            route: "/achievements",
-            icon: Trophy,
         },
         {
             route: "/settings",

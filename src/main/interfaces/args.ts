@@ -3,14 +3,9 @@ export interface TicketCategoryArgs {
     class: string;
 }
 
-export interface EventCategoryArgs {
-    category: string;
-    class: string;
-}
-
 export interface ActivityArgs {
     activity: string;
-    type: "Timed" | "Duration" | "Count";
+    type: "Timed" | "Duration" | "Count" | "Other";
     class: string;
 }
 
@@ -26,18 +21,11 @@ export interface EventArgs {
     date: number;
     hour: number;
     minute: number;
-    category_id: string;
-}
-
-export interface RescheduleEventArgs {
-    event_id: string;
-    event: string;
-    new_date: number;
 }
 
 export interface WorkoutArgs {
-    workout: string | number;
-    date: number;
+    value: any;
+    type: "Duration" | "Timed" | "Count" | "General Workout";
     activity_id: string;
 }
 
@@ -55,15 +43,9 @@ export interface ShortcutArgs {
 
 export interface ReminderArgs {
     reminder: string;
-    absolute: number;
-    relative_number: number;
-    relative_unit: "minutes" | "hours" | "days";
-}
-
-export interface AchievementArgs {
-    achievement: string;
-    date: number;
-    class: string;
+    hour: number;
+    minute: number;
+    type: "Absolute" | "Relative";
 }
 
 export interface NoteArgs {

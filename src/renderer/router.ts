@@ -1,5 +1,5 @@
 import { createWebHashHistory, createRouter } from "vue-router";
-import { HomePage, TicketsPage, FitnessPage, SettingsPage, AchievementsPage, PlannerPage, NotesPage } from "@views";
+import { HomePage, TicketsPage, FitnessPage, SettingsPage, PlannerPage, NotesPage } from "@views";
 
 const routes = [
     {
@@ -13,10 +13,6 @@ const routes = [
     {
         path: "/fitness",
         component: FitnessPage,
-    },
-    {
-        path: "/achievements",
-        component: AchievementsPage,
     },
     {
         path: "/planner",

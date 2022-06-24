@@ -1,7 +1,7 @@
 import { ipcMain } from "electron";
 import { getId, formatDate } from "../utils";
 import { HabitArgs, HabitModel } from "../interfaces";
-import { createHabit, getHabits, updateHabit, deleteHabit } from "../services";
+import { createHabit, getHabits, updateHabit, deleteHabit, checkInHabit } from "../services";
 import dayjs from "dayjs";
 
 ipcMain.handle("createHabit", async (_, args: HabitArgs) => {
@@ -37,6 +37,16 @@ ipcMain.handle("getHabits", async () => {
     } catch (error) {
         console.log(error);
         return { error: "Failed to get habits" };
+    }
+});
+
+ipcMain.handle("checkInHabit", async (_, args: HabitModel) => {
+    try {
+        const data = await checkInHabit(args);
+        return { data };
+    } catch (error) {
+        console.log(error);
+        return { error: "Failed to check in habit" };
     }
 });
 

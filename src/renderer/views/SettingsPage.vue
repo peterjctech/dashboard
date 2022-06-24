@@ -1,11 +1,11 @@
 <script setup lang="ts">
     import {
         ActivitiesConfig,
-        EventCategoriesConfig,
         HabitsConfig,
         QuotesConfig,
         ShortcutsConfig,
         TicketCategoriesConfig,
+        GeneralConfig,
     } from "@domain";
     import { useFormat } from "@mixins";
     import { NTabs as Tabs, NTabPane as TabPane } from "naive-ui";
@@ -25,7 +25,7 @@
         "pink",
         "light",
     ]);
-    const activityTypes = useFormat(["Timed", "Duration", "Count"]);
+    const activityTypes = useFormat(["Timed", "Duration", "Count", "General Workout"]);
     const shortcutTypes = useFormat(["Application", "Link", "Search"]);
 </script>
 
@@ -33,14 +33,14 @@
     <main class="settings-page">
         <Card class="settings-page__card">
             <Tabs animated>
+                <TabPane name="Config">
+                    <GeneralConfig />
+                </TabPane>
                 <TabPane name="Activities">
                     <ActivitiesConfig :classes="classes" :types="activityTypes" />
                 </TabPane>
                 <TabPane name="Ticket Categories">
                     <TicketCategoriesConfig :classes="classes" />
-                </TabPane>
-                <TabPane name="Event Categories">
-                    <EventCategoriesConfig :classes="classes" />
                 </TabPane>
                 <TabPane name="Habits">
                     <HabitsConfig :classes="classes" />
