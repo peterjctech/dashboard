@@ -15,6 +15,18 @@ const config = defineConfig({
         emptyOutDir: true,
     },
     plugins: [vuePlugin()],
+    resolve: {
+        alias: {
+            "@assets": Path.join(__dirname, "..", "src", "renderer", "assets"),
+        },
+    },
+    css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: `@import "./src/renderer/styles/index.scss";`,
+            },
+        },
+    },
 });
 
 module.exports = config;

@@ -1,0 +1,18 @@
+$default: "Exo 2";
+$fancy: "Lemonada";
+$writing: "Edu NSW ACT Foundation";
+
+@font-face {
+    font-family: $default;
+    src: url("@assets/fonts/Exo2-Regular.ttf");
+}
+
+@font-face {
+    font-family: $fancy;
+    src: url("@assets/fonts/Lemonada-Regular.ttf");
+}
+
+@font-face {
+    font-family: $writing;
+    src: url("@assets/fonts/EduNSWACTFoundation-Regular.ttf");
+}
