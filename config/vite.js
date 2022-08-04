@@ -18,6 +18,10 @@ const config = defineConfig({
     resolve: {
         alias: {
             "@assets": Path.join(__dirname, "..", "src", "renderer", "assets"),
+            "@components": Path.join(__dirname, "..", "src", "renderer", "components"),
+            "@common": Path.join(__dirname, "..", "src", "renderer", "common"),
+            "@helpers": Path.join(__dirname, "..", "src", "renderer", "helpers"),
+            "@views": Path.join(__dirname, "..", "src", "renderer", "views"),
         },
     },
     css: {

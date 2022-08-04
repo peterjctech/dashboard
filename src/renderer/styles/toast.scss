@@ -1,0 +1,21 @@
+$vt-color-default: $help;
+$vt-color-info: $info;
+$vt-color-success: $success;
+$vt-color-warning: $warning;
+$vt-color-error: $error;
+
+$vt-text-color-default: $neutral-5;
+$vt-text-color-info: $neutral-5;
+$vt-text-color-success: $neutral-5;
+$vt-text-color-warning: $neutral-5;
+$vt-text-color-error: $neutral-5;
+
+$vt-font-family: $default;
+
+@import "vue-toastification/src/scss/_variables";
+@import "vue-toastification/src/scss/_toastContainer";
+@import "vue-toastification/src/scss/_toast";
+@import "vue-toastification/src/scss/_closeButton";
+@import "vue-toastification/src/scss/_progressBar";
+@import "vue-toastification/src/scss/_icon";
+@import "vue-toastification/src/scss/animations/_bounce";

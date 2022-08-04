@@ -1,0 +1,32 @@
+// TOAST
+
+@keyframes toastEnter {
+    0% {
+        opacity: 0;
+        transform: translateX(5rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+@keyframes toastLeave {
+    0% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(5rem);
+    }
+}
+
+.toast-enter-active {
+    animation: toastEnter 300ms;
+}
+.toast-leave-active {
+    animation: toastLeave 300ms;
+}
+.toast-move {
+    transition: all 300ms ease-in;
+}

@@ -1,8 +1,21 @@
+<script setup lang="ts">
+    import { Sidebar, Titlebar } from "@components";
+    import { NConfigProvider, darkTheme } from "naive-ui";
+</script>
+
 <template>
-    <h1>Hello World</h1>
+    <NConfigProvider :theme="darkTheme">
+        <router-view />
+        <Sidebar />
+        <Titlebar />
+    </NConfigProvider>
 </template>
 
 <style lang="scss">
+    @import "./styles/toast.scss";
+    @import "./styles/transitions.scss";
+    @import "./styles/helpers.scss";
+
     * {
         margin: 0;
         padding: 0;
@@ -12,6 +25,18 @@
 
     html {
         font-size: 62.5%;
+    }
+
+    main {
+        position: fixed;
+        top: 4rem;
+        left: 0;
+        width: calc(100vw - 6rem);
+        height: calc(100vh - 4rem);
+        background-color: $neutral-5;
+        display: grid;
+        padding: 2rem;
+        gap: 2rem;
     }
 
     h1 {
