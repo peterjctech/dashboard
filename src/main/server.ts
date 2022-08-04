@@ -1,7 +1,10 @@
 import { app, BrowserWindow } from "electron";
 import { join } from "path";
+import { init } from "./database";
 
-function createWindow() {
+async function createWindow() {
+    await init();
+
     const mainWindow = new BrowserWindow({
         frame: false,
         webPreferences: {
