@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import { join } from "path";
 import { init } from "./database";
+import "./controllers";
 
 async function createWindow() {
     await init();
