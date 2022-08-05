@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { Settings, Notification, ToDo } from "@types";
 import { invoke, toast, notify } from "@helpers";
-import { useTickets } from "@store";
+import { useTickets, useMisc } from "@store";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
@@ -97,8 +97,10 @@ const useGeneral = defineStore("generalStore", {
             this.clock.date = dayjs().format("dddd, Do MMMM, YYYY");
 
             const ticketStore = useTickets();
+            const miscStore = useMisc();
 
             await ticketStore.initStore();
+            await miscStore.initStore();
 
             ticketStore.tickets.forEach((obj) => ticketStore.handleTicket(obj));
 
