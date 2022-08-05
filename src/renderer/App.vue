@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { ref, onMounted } from "vue";
     import { Sidebar, Titlebar } from "@components";
-    import { NConfigProvider, darkTheme } from "naive-ui";
+    import { NConfigProvider, darkTheme, GlobalThemeOverrides } from "naive-ui";
     import { useGeneral } from "@store";
 
     const generalStore = useGeneral();
@@ -12,10 +12,21 @@
         await generalStore.initApp();
         loading.value = false;
     });
+
+    const themeOverrides: GlobalThemeOverrides = {
+        common: {
+            primaryColorPressed: "#8a2be2",
+            primaryColorHover: "#a155e7",
+            primaryColor: "#c699f0",
+        },
+        DataTable: {
+            tdTextColor: "black",
+        },
+    };
 </script>
 
 <template>
-    <NConfigProvider :theme="darkTheme">
+    <NConfigProvider :theme="darkTheme" :theme-overrides="themeOverrides">
         <main v-if="loading" class="loading-page">
             <h1>Loading...</h1>
         </main>
@@ -29,6 +40,7 @@
     @import "./styles/toast.scss";
     @import "./styles/transitions.scss";
     @import "./styles/helpers.scss";
+    @import "./styles/data-table.scss";
 
     * {
         margin: 0;

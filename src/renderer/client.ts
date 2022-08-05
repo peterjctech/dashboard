@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Toast from "vue-toastification";
-import { NButton } from "naive-ui";
-import { Icon } from "@common";
+import { NButton, NCard, NTabs, NTabPane, NInput, NDataTable, NSelect } from "naive-ui";
+import { Icon, Form } from "@common";
 import { createPinia } from "pinia";
 
 const app = createApp(App);
@@ -17,5 +17,12 @@ app.use(Toast, {
     .use(createPinia())
     .use(router)
     .component("Button", NButton)
+    .component("Card", NCard)
+    .component("Tabs", NTabs)
+    .component("TabPane", NTabPane)
+    .component("Input", NInput)
+    .component("DataTable", NDataTable)
+    .component("Select", NSelect)
     .component("Icon", Icon)
+    .component("Form", Form)
     .mount("#app");

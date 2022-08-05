@@ -1,15 +1,49 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+    import { TicketConfig } from "@components";
+</script>
 
 <template>
     <main class="settings-page">
-        <h1>settings-page component...</h1>
+        <Card>
+            <Tabs animated>
+                <TabPane name="Tickets">
+                    <TicketConfig />
+                </TabPane>
+            </Tabs>
+        </Card>
     </main>
 </template>
 
 <style lang="scss">
     .settings-page {
-        h1 {
-            color: white;
+        .n-tabs {
+            display: flex;
+            flex-flow: column;
+        }
+
+        .n-tab-pane,
+        .n-tabs,
+        .n-tabs-pane-wrapper {
+            height: 100%;
+        }
+        .n-tab-pane {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 1fr;
+
+            > * {
+                padding: 2rem;
+            }
+
+            > :nth-child(1) {
+                grid-area: 1 / 1 / 2 / 2;
+            }
+            > :nth-child(2) {
+                grid-area: 1 / 2 / 2 / 4;
+            }
+            > :nth-child(3) {
+                grid-area: 1 / 4 / 2 / 5;
+            }
         }
     }
 </style>

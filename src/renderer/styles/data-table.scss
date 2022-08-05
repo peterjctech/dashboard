@@ -1,0 +1,43 @@
+.n-data-table {
+    width: 100%;
+    height: 100%;
+}
+
+.n-data-table-wrapper {
+    background-color: lighten($neutral-5, 5%);
+}
+
+.n-data-table-tr {
+    td {
+        font-weight: bold;
+    }
+
+    @each $name, $color in $colors {
+        &.#{"" + $name} {
+            td {
+                background-color: rgba($color: $color, $alpha: 0.8);
+            }
+            &:hover {
+                td {
+                    background-color: $color !important;
+                }
+            }
+        }
+    }
+
+    &.error {
+        td {
+            color: darkred;
+        }
+    }
+    &.warning {
+        td {
+            color: darkorange;
+        }
+    }
+    &.success {
+        td {
+            color: darkgreen;
+        }
+    }
+}

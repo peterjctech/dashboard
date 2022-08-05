@@ -16,6 +16,7 @@
             "@common": ["./common"],
             "@views": ["./views"],
             "@helpers": ["./helpers"],
+            "@hooks": ["./hooks"],
             "@types": ["./types"],
             "@store": ["./store"]
         }

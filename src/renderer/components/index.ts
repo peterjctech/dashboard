@@ -1,4 +1,6 @@
 import Sidebar from "./Sidebar.vue";
 import Titlebar from "./Titlebar.vue";
 
-export { Sidebar, Titlebar };
+import TicketConfig from "./settings/TicketConfig.vue";
+
+export { Sidebar, Titlebar, TicketConfig };

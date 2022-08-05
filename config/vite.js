@@ -21,6 +21,7 @@ const config = defineConfig({
             "@components": Path.join(__dirname, "..", "src", "renderer", "components"),
             "@common": Path.join(__dirname, "..", "src", "renderer", "common"),
             "@helpers": Path.join(__dirname, "..", "src", "renderer", "helpers"),
+            "@hooks": Path.join(__dirname, "..", "src", "renderer", "hooks"),
             "@views": Path.join(__dirname, "..", "src", "renderer", "views"),
             "@store": Path.join(__dirname, "..", "src", "renderer", "store"),
             "@types": Path.join(__dirname, "..", "src", "renderer", "types"),

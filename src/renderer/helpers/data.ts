@@ -1,0 +1,15 @@
+export const useableColors = [
+    "primary",
+    "secondary",
+    "tertiary",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "cyan",
+    "blue",
+    "purple",
+    "magenta",
+    "pink",
+    "white",
+];
