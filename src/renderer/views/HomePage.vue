@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { Events, Tickets } from "@common";
-    import { Quote, Clock } from "@components";
+    import { Quote, Clock, Weather } from "@components";
     import { useTickets, useTime } from "@store";
 
     const ticketStore = useTickets();
@@ -21,6 +21,7 @@
         />
         <Quote style="grid-area: 1 / 3 / 5 / 4" />
         <Clock style="grid-area: 6 / 3 / 7 / 4" />
+        <Weather style="grid-area: 5 / 2 / 7 / 3" />
     </main>
 </template>
 

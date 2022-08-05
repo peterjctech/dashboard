@@ -5,6 +5,7 @@ import ToDoList from "./ToDoList.vue";
 
 import Clock from "./home/Clock.vue";
 import Quote from "./home/Quote.vue";
+import Weather from "./home/Weather.vue";
 
 import TicketFilters from "./tickets/TicketFilters.vue";
 import TicketForm from "./tickets/TicketForm.vue";
@@ -39,4 +40,5 @@ export {
     AchievementTypes,
     AchievementConfig,
     EventForm,
+    Weather,
 };

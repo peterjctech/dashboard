@@ -16,24 +16,29 @@ interface AddNotificationProps {
     notif: string | null;
 }
 
-interface Clock {
-    date: string;
-    time: string;
-    timeLeft: string;
-}
-
-interface NextNotification {
-    ids: string[];
-    message: string;
-    timestamp: number;
-}
-
 interface GeneralStoreState {
     settings: Settings;
-    clock: Clock;
+    clock: {
+        date: string;
+        time: string;
+        timeLeft: string;
+    };
     toDoList: ToDo[];
     notifications: Notification[];
-    nextNotification: null | NextNotification;
+    nextNotification: null | {
+        ids: string[];
+        message: string;
+        timestamp: number;
+    };
+    weather: {
+        cityName: string;
+        temperature: number;
+        sunrise: string;
+        sunset: string;
+        description: string;
+        icon: string;
+        last_updated: string;
+    };
 }
 
 const useGeneral = defineStore("generalStore", {
@@ -57,6 +62,15 @@ const useGeneral = defineStore("generalStore", {
             toDoList: [],
             notifications: [],
             nextNotification: null,
+            weather: {
+                cityName: "",
+                temperature: 0,
+                sunrise: "",
+                sunset: "",
+                description: "",
+                icon: "",
+                last_updated: "",
+            },
         };
     },
     actions: {
@@ -100,6 +114,7 @@ const useGeneral = defineStore("generalStore", {
             this.nextNotification = null;
             this.settings = await invoke("getSettings");
             this.clock.date = dayjs().format("dddd, Do MMMM, YYYY");
+            await this.getWeather();
 
             const ticketStore = useTickets();
             const miscStore = useMisc();
@@ -189,6 +204,42 @@ const useGeneral = defineStore("generalStore", {
         deleteNotification(id: string) {
             this.notifications = this.notifications.filter((obj) => obj.id !== id);
             this.toDoList = this.toDoList.filter((obj) => obj.id !== id);
+        },
+        async getWeather() {
+            const response = await fetch(
+                `https://api.openweathermap.org/data/2.5/weather?lat=${this.settings.latitude}&lon=${
+                    this.settings.longitude
+                }&units=imperial&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+            );
+            const json = await response.json();
+
+            if (json.name) {
+                this.weather = {
+                    cityName: json.name,
+                    temperature: Math.round(json.main.temp),
+                    sunrise: dayjs.unix(json.sys.sunrise).format("HH:mm"),
+                    sunset: dayjs.unix(json.sys.sunset).format("HH:mm"),
+                    description: json.weather[0].description,
+                    icon: `http://openweathermap.org/img/wn/${json.weather[0].icon}@2x.png`,
+                    last_updated: dayjs().format("HH:mm"),
+                };
+            } else {
+                toast.error("Failed to fetch weather data. Please configure your setting properly.");
+            }
+        },
+        async fetchCoordinates(zipCode: number) {
+            const response = await fetch(
+                `http://api.openweathermap.org/geo/1.0/zip?zip=${zipCode}&appid=${import.meta.env.VITE_WEATHER_API_KEY}`
+            );
+            const json = await response.json();
+            if (!json.lat) {
+                toast.error("Bad zip code");
+                return null;
+            }
+            return {
+                latitude: json.lat,
+                longitude: json.lon,
+            };
         },
     },
 });

@@ -31,10 +31,25 @@
     onMounted(() => {
         formData.value = JSON.parse(JSON.stringify(generalStore.settings));
     });
+
+    const submit = async () => {
+        if (formData.value.zip_code !== generalStore.settings.zip_code) {
+            const response = await generalStore.fetchCoordinates(formData.value.zip_code);
+            if (response) {
+                formData.value.latitude = response.latitude;
+                formData.value.longitude = response.longitude;
+            } else {
+                formData.value.zip_code = generalStore.settings.zip_code;
+            }
+        }
+        generalStore.updateSettings(formData.value);
+    };
 </script>
 
 <template>
-    <Form @submit="generalStore.updateSettings(formData)">
+    <Form @submit="submit">
+        <label>Zip Code</label>
+        <InputNumber v-model:value="formData.zip_code" placeholder="Zip Code" />
         <label>Ticket Notification Time</label>
         <Select v-model:value="formData.ticket_notify_time" :options="times" placeholder="Ticket Notification Time" />
         <label>Goal Notification Time</label>
@@ -49,6 +64,18 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>Zip Code</td>
+                    <td>{{ generalStore.settings.zip_code }}</td>
+                </tr>
+                <tr>
+                    <td>Latitude</td>
+                    <td>{{ generalStore.settings.latitude }}</td>
+                </tr>
+                <tr>
+                    <td>Longitude</td>
+                    <td>{{ generalStore.settings.longitude }}</td>
+                </tr>
                 <tr>
                     <td>Ticket Notification Time</td>
                     <td>{{ generalStore.settings.ticket_notify_time }}:00</td>
