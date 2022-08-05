@@ -1,11 +1,14 @@
 <script setup lang="ts">
-    import { TicketConfig } from "@components";
+    import { TicketConfig, GeneralConfig } from "@components";
 </script>
 
 <template>
     <main class="settings-page">
         <Card>
             <Tabs animated>
+                <TabPane name="Settings">
+                    <GeneralConfig />
+                </TabPane>
                 <TabPane name="Tickets">
                     <TicketConfig />
                 </TabPane>

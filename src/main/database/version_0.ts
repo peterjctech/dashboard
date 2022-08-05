@@ -13,6 +13,7 @@ export const migration_0 = async () => {
         };
 
         await insertSetting("app_version", "");
+        await insertSetting("ticket_notify_time", 0);
 
         await db.exec("CREATE TABLE categories (category_id TEXT PRIMARY KEY, category TEXT, color TEXT, for TEXT)");
         await db.exec(

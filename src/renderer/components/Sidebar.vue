@@ -3,6 +3,7 @@
     import { Home, Ticket, Settings } from "@vicons/ionicons5";
     import { h } from "vue";
     import { RouterLink } from "vue-router";
+    import { Notifications, ToDoList } from "@components";
 
     const pages = [
         {
@@ -33,6 +34,10 @@
 <template>
     <div class="sidebar bordered">
         <root />
+        <div class="sidebar__links">
+            <Notifications />
+            <ToDoList />
+        </div>
     </div>
 </template>
 
@@ -46,6 +51,7 @@
         background-color: $neutral-3;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
 
         &__links {
             display: flex;

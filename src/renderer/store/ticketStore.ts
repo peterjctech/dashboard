@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import { invoke } from "@helpers";
 import { Ticket, Category, TicketProps, CategoryProps } from "@types";
+import { useGeneral } from "@store";
+import dayjs from "dayjs";
 
 interface TicketStoreState {
     tickets: Ticket[];
@@ -43,6 +45,7 @@ const useTickets = defineStore("ticketStore", {
             if (response) {
                 this.tickets.push(response);
                 this.sortTickets();
+                this.handleTicket(response);
             }
         },
         async toggleTicket(props: Ticket) {
@@ -51,6 +54,7 @@ const useTickets = defineStore("ticketStore", {
                 this.tickets = this.tickets.map((obj) => {
                     return obj.ticket_id === response.ticket_id ? response : obj;
                 });
+                this.handleTicket(response);
             }
         },
         async delayTicket(props: Ticket) {
@@ -60,14 +64,39 @@ const useTickets = defineStore("ticketStore", {
                     return obj.ticket_id === response.ticket_id ? response : obj;
                 });
                 this.sortTickets();
+                this.handleTicket(response);
             }
         },
         async deleteTicket(props: Ticket) {
             const response: string = await invoke("deleteTicket", props);
             this.tickets = this.tickets.filter((obj) => obj.ticket_id !== response);
+            const generalStore = useGeneral();
+            generalStore.deleteNotification(props.ticket_id);
         },
         sortTickets() {
             this.tickets = this.tickets.sort((a, b) => a.timestamp - b.timestamp);
+        },
+        handleTicket(props: Ticket) {
+            const generalStore = useGeneral();
+            let message = "";
+            const hasNotif = generalStore.checkForNotification(props.ticket_id);
+            if (props.is_focused) message = `Focused ticket: ${props.ticket}`;
+            if (props.status === "Overdue") message = `Overdue ticket: ${props.ticket}`;
+            if (props.status === "Today") message = `Ticket due today: ${props.ticket}`;
+
+            if (hasNotif && !message) {
+                generalStore.deleteNotification(props.ticket_id);
+            } else if (!hasNotif && message) {
+                generalStore.addNotification({
+                    id: props.ticket_id,
+                    type: "Ticket",
+                    color: "pink",
+                    redirect: "/tickets",
+                    timestamp: dayjs().startOf("day").hour(generalStore.settings.ticket_notify_time).unix(),
+                    toDo: `Finish ticket: ${props.ticket}`,
+                    notif: message,
+                });
+            }
         },
     },
 });

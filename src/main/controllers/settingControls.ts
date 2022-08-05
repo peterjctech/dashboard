@@ -6,6 +6,7 @@ ipcMain.handle("getSettings", async () => {
     const data: Settings = {
         database_version: 0,
         app_version: "",
+        ticket_notify_time: 0,
     };
 
     try {
@@ -20,5 +21,24 @@ ipcMain.handle("getSettings", async () => {
     } catch (error) {
         console.log(error);
         return { error: "Failed to get settings" };
+    }
+});
+
+ipcMain.handle("updateSettings", async (_, props: Settings) => {
+    try {
+        const db = await openDB();
+
+        console.log(props);
+
+        const update = async (key: string, value: any) => {
+            await db.run("UPDATE settings SET value = ? WHERE key = ?", [value, key]);
+        };
+
+        await update("ticket_notify_time", props.ticket_notify_time);
+
+        return { help: "Updated settings", data: props };
+    } catch (error) {
+        console.log(error);
+        return { error: "Failed to update settings" };
     }
 });

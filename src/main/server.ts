@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import contextMenu from "electron-context-menu";
+import Badge from "electron-windows-badge";
 import { join } from "path";
 import { init } from "./database";
 import "./controllers";
@@ -16,6 +17,7 @@ async function createWindow() {
         },
     });
 
+    new Badge(mainWindow);
     mainWindow.maximize();
     contextMenu();
 
