@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { Settings, Notification, ToDo } from "@types";
 import { invoke, toast, notify } from "@helpers";
-import { useTickets, useMisc } from "@store";
+import { useTickets, useMisc, useTrophy } from "@store";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
@@ -43,6 +43,11 @@ const useGeneral = defineStore("generalStore", {
                 database_version: 0,
                 app_version: "",
                 ticket_notify_time: 0,
+                goal_notify_time: 0,
+                event_notify_time: 0,
+                zip_code: 0,
+                latitude: 0,
+                longitude: 0,
             },
             clock: {
                 date: "",
@@ -98,11 +103,14 @@ const useGeneral = defineStore("generalStore", {
 
             const ticketStore = useTickets();
             const miscStore = useMisc();
+            const trophyStore = useTrophy();
 
             await ticketStore.initStore();
             await miscStore.initStore();
+            await trophyStore.initStore();
 
             ticketStore.tickets.forEach((obj) => ticketStore.handleTicket(obj));
+            trophyStore.goals.forEach((obj) => trophyStore.handleGoal(obj));
 
             this.setNextNotification();
         },

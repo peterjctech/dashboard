@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { TicketConfig, GeneralConfig, QuoteConfig } from "@components";
+    import { TicketConfig, GeneralConfig, QuoteConfig, AchievementConfig } from "@components";
 </script>
 
 <template>
@@ -11,6 +11,9 @@
                 </TabPane>
                 <TabPane name="Tickets">
                     <TicketConfig />
+                </TabPane>
+                <TabPane name="Achievement">
+                    <AchievementConfig />
                 </TabPane>
                 <TabPane name="Quotes">
                     <QuoteConfig />

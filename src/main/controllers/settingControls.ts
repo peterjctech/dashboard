@@ -7,6 +7,11 @@ ipcMain.handle("getSettings", async () => {
         database_version: 0,
         app_version: "",
         ticket_notify_time: 0,
+        goal_notify_time: 0,
+        event_notify_time: 0,
+        zip_code: 0,
+        latitude: 0,
+        longitude: 0,
     };
 
     try {
@@ -28,13 +33,16 @@ ipcMain.handle("updateSettings", async (_, props: Settings) => {
     try {
         const db = await openDB();
 
-        console.log(props);
-
         const update = async (key: string, value: any) => {
             await db.run("UPDATE settings SET value = ? WHERE key = ?", [value, key]);
         };
 
         await update("ticket_notify_time", props.ticket_notify_time);
+        await update("event_notify_time", props.event_notify_time);
+        await update("goal_notify_time", props.goal_notify_time);
+        await update("zip_code", props.zip_code);
+        await update("latitude", props.latitude);
+        await update("longitude", props.longitude);
 
         return { help: "Updated settings", data: props };
     } catch (error) {

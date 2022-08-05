@@ -9,9 +9,15 @@ import Quote from "./home/Quote.vue";
 import TicketFilters from "./tickets/TicketFilters.vue";
 import TicketForm from "./tickets/TicketForm.vue";
 
+import Goals from "./trophy/Goals.vue";
+import GoalForm from "./trophy/GoalForm.vue";
+import AchievementTypes from "./trophy/AchievementTypes.vue";
+import AchievementForm from "./trophy/AchievementForm.vue";
+
 import TicketConfig from "./settings/TicketConfig.vue";
 import GeneralConfig from "./settings/GeneralConfig.vue";
 import QuoteConfig from "./settings/QuoteConfig.vue";
+import AchievementConfig from "./settings/AchievementConfig.vue";
 
 export {
     Sidebar,
@@ -25,4 +31,9 @@ export {
     QuoteConfig,
     Clock,
     Quote,
+    Goals,
+    GoalForm,
+    AchievementForm,
+    AchievementTypes,
+    AchievementConfig,
 };

@@ -2,7 +2,7 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import Toast from "vue-toastification";
-import { NButton, NCard, NTabs, NTabPane, NInput, NDataTable, NSelect, NInputNumber } from "naive-ui";
+import { NButton, NCard, NTabs, NTabPane, NInput, NDataTable, NSelect, NInputNumber, NSwitch } from "naive-ui";
 import { Icon, Form } from "@common";
 import { createPinia } from "pinia";
 
@@ -24,6 +24,7 @@ app.use(Toast, {
     .component("DataTable", NDataTable)
     .component("Select", NSelect)
     .component("InputNumber", NInputNumber)
+    .component("Switch", NSwitch)
     .component("Icon", Icon)
     .component("Form", Form)
     .mount("#app");

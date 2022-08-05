@@ -9,6 +9,11 @@
         database_version: 0,
         app_version: "",
         ticket_notify_time: 0,
+        event_notify_time: 0,
+        goal_notify_time: 0,
+        zip_code: 0,
+        latitude: 0,
+        longitude: 0,
     });
 
     const hours = [];
@@ -32,6 +37,8 @@
     <Form @submit="generalStore.updateSettings(formData)">
         <label>Ticket Notification Time</label>
         <Select v-model:value="formData.ticket_notify_time" :options="times" placeholder="Ticket Notification Time" />
+        <label>Goal Notification Time</label>
+        <Select v-model:value="formData.goal_notify_time" :options="times" placeholder="Goal Notification Time" />
     </Form>
     <section>
         <NTable :single-line="false" striped>
@@ -45,6 +52,10 @@
                 <tr>
                     <td>Ticket Notification Time</td>
                     <td>{{ generalStore.settings.ticket_notify_time }}:00</td>
+                </tr>
+                <tr>
+                    <td>Goal Notification Time</td>
+                    <td>{{ generalStore.settings.goal_notify_time }}:00</td>
                 </tr>
             </tbody>
         </NTable>
