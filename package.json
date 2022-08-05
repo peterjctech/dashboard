@@ -1,6 +1,6 @@
 {
     "name": "dashboard",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "author": "PeterJCTech",
     "description": "Utility application",
     "main": "build/main/server.js",
