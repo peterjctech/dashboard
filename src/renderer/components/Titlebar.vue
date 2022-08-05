@@ -1,11 +1,14 @@
 <script setup lang="ts">
     import { Add, Close, Remove } from "@vicons/ionicons5";
     import { invoke } from "@helpers";
+    import { useGeneral } from "@store";
+
+    const generalStore = useGeneral();
 </script>
 
 <template>
     <div class="titlebar">
-        <h3 class="titlebar__title">Dashboard</h3>
+        <h3 class="titlebar__title">Dashboard {{ generalStore.settings.app_version }}</h3>
         <div class="titlebar__buttons">
             <Icon @click="invoke('minimizeWindow')" type="warning">
                 <Remove />

@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from "electron";
+import contextMenu from "electron-context-menu";
 import { join } from "path";
 import { init } from "./database";
 import "./controllers";
@@ -16,6 +17,12 @@ async function createWindow() {
     });
 
     mainWindow.maximize();
+    contextMenu();
+
+    mainWindow.webContents.on("new-window", (e, url) => {
+        e.preventDefault();
+        require("electron").shell.openExternal(url);
+    });
 
     if (process.env.NODE_ENV === "development") {
         const rendererPort = process.argv[2];

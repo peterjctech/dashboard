@@ -15,7 +15,9 @@
             "@components": ["./components"],
             "@common": ["./common"],
             "@views": ["./views"],
-            "@helpers": ["./helpers"]
+            "@helpers": ["./helpers"],
+            "@types": ["./types"],
+            "@store": ["./store"]
         }
     },
     "include": ["./**/*.ts", "./**/*.d.ts", "./**/*.tsx", "./**/*.vue"]

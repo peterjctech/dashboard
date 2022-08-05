@@ -26,6 +26,8 @@
     },
     "dependencies": {
         "dayjs": "^1.11.4",
+        "electron-context-menu": "^3.3.0",
+        "pinia": "^2.0.17",
         "sqlite": "^4.1.2",
         "sqlite3": "^5.0.11",
         "uuid": "^8.3.2",

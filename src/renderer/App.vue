@@ -1,12 +1,26 @@
 <script setup lang="ts">
+    import { ref, onMounted } from "vue";
     import { Sidebar, Titlebar } from "@components";
     import { NConfigProvider, darkTheme } from "naive-ui";
+    import { useGeneral } from "@store";
+
+    const generalStore = useGeneral();
+
+    const loading = ref(true);
+
+    onMounted(async () => {
+        await generalStore.initApp();
+        loading.value = false;
+    });
 </script>
 
 <template>
     <NConfigProvider :theme="darkTheme">
-        <router-view />
-        <Sidebar />
+        <main v-if="loading" class="loading-page">
+            <h1>Loading...</h1>
+        </main>
+        <router-view v-if="!loading" />
+        <Sidebar v-if="!loading" />
         <Titlebar />
     </NConfigProvider>
 </template>
