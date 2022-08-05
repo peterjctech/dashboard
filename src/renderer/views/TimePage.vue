@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { EventForm } from "@components";
+    import { EventForm, Reminders, ReminderForm } from "@components";
     import { Events } from "@common";
     import { useTime } from "@store";
 
@@ -9,8 +9,12 @@
 <template>
     <main class="time-page">
         <Events :events="timeStore.events" style="grid-area: 1 / 1 / 6 / 3" />
+        <Reminders style="grid-area: 1 / 3 / 3 / 4" />
         <Card style="grid-area: 3 / 3 / 6 / 4">
             <Tabs animated>
+                <TabPane name="Reminder">
+                    <ReminderForm />
+                </TabPane>
                 <TabPane name="Event">
                     <EventForm />
                 </TabPane>

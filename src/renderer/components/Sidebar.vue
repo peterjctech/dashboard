@@ -1,6 +1,6 @@
 <script setup lang="ts">
     import { Icon } from "@vicons/utils";
-    import { Home, Ticket, Settings, Trophy, Time } from "@vicons/ionicons5";
+    import { Home, Ticket, Settings, Trophy, Time, Book } from "@vicons/ionicons5";
     import { h } from "vue";
     import { RouterLink } from "vue-router";
     import { Notifications, ToDoList } from "@components";
@@ -13,6 +13,10 @@
         {
             route: "/tickets",
             icon: Ticket,
+        },
+        {
+            route: "/notebook",
+            icon: Book,
         },
         {
             route: "/time",

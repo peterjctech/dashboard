@@ -1,10 +1,12 @@
 <script setup lang="ts">
-    import { Events, Tickets } from "@common";
+    import { Events, Tickets, Habits } from "@common";
     import { Quote, Clock, Weather, Shortcuts } from "@components";
-    import { useTickets, useTime } from "@store";
+    import { useTickets, useTime, useNotebook } from "@store";
+    import dayjs from "dayjs";
 
     const ticketStore = useTickets();
     const timeStore = useTime();
+    const notebookStore = useNotebook();
 </script>
 
 <template>
@@ -13,6 +15,11 @@
             :tickets="ticketStore.tickets.filter((obj) => obj.is_focused)"
             focused
             style="grid-area: 1 / 1 / 4 / 2"
+        />
+        <Habits
+            :habits="notebookStore.habits.filter((obj) => dayjs().endOf('day').unix() >= obj.next_due)"
+            compact
+            style="grid-area: 4 / 1 / 7 / 2"
         />
         <Events
             :events="timeStore.events.filter((obj) => obj.status !== 'None')"

@@ -44,7 +44,7 @@ export const createHabitModel = (props: HabitProps) => {
         frequency: props.frequency,
         last_completed: now,
         last_broken: now,
-        next_due: dayjs().endOf("day").add(props.frequency, "day").unix(),
+        next_due: dayjs().endOf("day").unix(),
     };
 
     return model;

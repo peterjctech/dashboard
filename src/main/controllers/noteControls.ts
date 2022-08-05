@@ -4,10 +4,6 @@ import { NoteProps, Note } from "../types";
 import { createNoteModel } from "../services";
 import dayjs from "dayjs";
 
-interface GetNoteProps {
-    type: string;
-}
-
 ipcMain.handle("createNote", async (_, props: NoteProps) => {
     if (!props.note) return { warning: "You must input a note" };
     const model = createNoteModel(props);
@@ -15,7 +11,7 @@ ipcMain.handle("createNote", async (_, props: NoteProps) => {
     try {
         const db = await openDB();
         await db.run(
-            "INSERT INTO notes (note_id, title, note, color, updated_at, timestamp) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO notes (note_id, title, note, color, updated_at, timestamp) VALUES (?, ?, ?, ?, ?, ?)",
             [model.note_id, model.title, model.note, model.color, model.updated_at, model.timestamp]
         );
 

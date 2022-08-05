@@ -16,7 +16,7 @@ export const migration_3 = async () => {
             "CREATE TABLE notes (note_id TEXT PRIMARY KEY, title TEXT, note TEXT, color INTEGER, updated_at TEXT, timestamp INTEGER)"
         );
         await db.exec(
-            "CREATE TABLE habits (habit_id TEXT PRIMARY KEY, habit TEXT, frequency INTEGER, last_completed INTEGER, last_broken INTEGER, created_timestamp INTEGER)"
+            "CREATE TABLE habits (habit_id TEXT PRIMARY KEY, habit TEXT, frequency INTEGER, last_completed INTEGER, last_broken INTEGER, next_due INTEGER)"
         );
 
         mkdir(imagesDir(), { recursive: true }, (error) => {

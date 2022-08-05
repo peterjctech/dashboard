@@ -17,7 +17,7 @@
 
     const recordColumns = [
         { title: "Type", key: "category", width: 180 },
-        { title: "PR", key: "achievement" },
+        { title: "Personal Record", key: "achievement" },
     ];
 
     const columns = [

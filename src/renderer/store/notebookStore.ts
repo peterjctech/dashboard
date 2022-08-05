@@ -39,8 +39,8 @@ const useNotebook = defineStore("notebookStore", {
                 this.sortHabits();
             }
         },
-        async completeHabit(props: Habit) {
-            const response: Habit = await invoke("completeHabit", props);
+        async checkHabit(props: Habit) {
+            const response: Habit = await invoke("checkHabit", props);
             if (response) {
                 this.habits = this.habits.map((obj) => (obj.habit_id === response.habit_id ? response : obj));
                 if (response.next_due < dayjs().endOf("day").unix()) {

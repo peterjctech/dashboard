@@ -12,6 +12,14 @@ import TicketFilters from "./tickets/TicketFilters.vue";
 import TicketForm from "./tickets/TicketForm.vue";
 
 import EventForm from "./time/EventForm.vue";
+import ReminderForm from "./time/ReminderForm.vue";
+import Reminders from "./time/Reminders.vue";
+
+import ShoppingList from "./notebook/ShoppingList.vue";
+import ShoppingForm from "./notebook/ShoppingForm.vue";
+import HabitForm from "./notebook/HabitForm.vue";
+import NoteForm from "./notebook/NoteForm.vue";
+import Notes from "./notebook/Notes.vue";
 
 import Goals from "./trophy/Goals.vue";
 import GoalForm from "./trophy/GoalForm.vue";
@@ -45,4 +53,11 @@ export {
     Weather,
     ShortcutConfig,
     Shortcuts,
+    ShoppingForm,
+    ShoppingList,
+    ReminderForm,
+    Reminders,
+    HabitForm,
+    NoteForm,
+    Notes,
 };
