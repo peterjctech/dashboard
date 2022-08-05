@@ -5,3 +5,8 @@ export * from "./achievementTypes";
 export * from "./eventTypes";
 export * from "./goalTypes";
 export * from "./quoteTypes";
+export * from "./shortcutTypes";
+export * from "./habitTypes";
+export * from "./shoppingTypes";
+export * from "./reminderTypes";
+export * from "./noteTypes";

@@ -5,6 +5,8 @@ export const migration_3 = async () => {
     try {
         const db = await openDB();
 
+        await db.run("INSERT INTO settings (key, value) VALUES ('habit_notify_time', 0)");
+
         await db.exec("CREATE TABLE shopping_list (item_id TEXT PRIMARY KEY, item TEXT, color TEXT)");
         await db.exec(
             "CREATE TABLE reminders (reminder_id TEXT PRIMARY KEY, reminder TEXT, timestamp INTEGER, time TEXT)"

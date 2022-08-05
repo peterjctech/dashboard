@@ -1,24 +1,28 @@
 import { defineStore } from "pinia";
 import { invoke } from "@helpers";
-import { Event, EventProps } from "@types";
+import { Event, EventProps, Reminder, ReminderProps } from "@types";
 import { useGeneral } from "@store";
 import dayjs from "dayjs";
 
 interface TimeStoreState {
     events: Event[];
+    reminders: Reminder[];
 }
 
 const useTime = defineStore("timeStore", {
     state: (): TimeStoreState => {
         return {
             events: [],
+            reminders: [],
         };
     },
     actions: {
         async initStore() {
             const events: Event[] = await invoke("getEvents");
+            const reminders: Reminder[] = await invoke("getReminders");
 
             this.events = events;
+            this.reminders = reminders;
 
             this.sortEvents();
         },
@@ -46,6 +50,21 @@ const useTime = defineStore("timeStore", {
                 generalStore.deleteNotification(response);
             }
         },
+        async createReminder(props: ReminderProps) {
+            const response: Reminder = await invoke("createReminder", props);
+            if (response) {
+                this.reminders.push(response);
+                this.handleReminder(response, true);
+            }
+        },
+        async deleteReminder(props: Reminder) {
+            const response: string = await invoke("deleteReminder", props);
+            if (response) {
+                this.reminders = this.reminders.filter((obj) => obj.reminder_id !== response);
+                const generalStore = useGeneral();
+                generalStore.deleteNotification(response);
+            }
+        },
         sortEvents() {
             this.events = this.events.sort((a, b) => a.timestamp - b.timestamp);
         },
@@ -64,19 +83,31 @@ const useTime = defineStore("timeStore", {
             if (hasNotif && !message) {
                 generalStore.deleteNotification(props.event_id);
             } else if (!hasNotif && message) {
-                const hour = dayjs.unix(props.timestamp).hour() - generalStore.settings.event_warning_time;
-
                 generalStore.addNotification({
                     id: props.event_id,
                     color: "magenta",
                     redirect: "/time",
-                    hour: hour > 0 ? hour : 0,
-                    minute: hour > 0 ? dayjs.unix(props.timestamp).minute() : 0,
+                    timestamp: dayjs
+                        .unix(props.timestamp)
+                        .subtract(generalStore.settings.event_warning_time, "hour")
+                        .unix(),
                     toDo: message,
                     notif: status ? message : null,
                     update,
                 });
             }
+        },
+        handleReminder(props: Reminder, update: boolean) {
+            const generalStore = useGeneral();
+            generalStore.addNotification({
+                id: props.reminder_id,
+                color: "orange",
+                redirect: "/time",
+                timestamp: props.timestamp,
+                toDo: null,
+                notif: `Reminder: ${props.reminder}`,
+                update,
+            });
         },
     },
 });

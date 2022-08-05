@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { Settings, Notification, ToDo } from "@types";
 import { invoke, toast, notify } from "@helpers";
-import { useTickets, useMisc, useTrophy, useTime } from "@store";
+import { useTickets, useMisc, useTrophy, useTime, useNotebook } from "@store";
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 dayjs.extend(advancedFormat);
@@ -10,8 +10,7 @@ interface AddNotificationProps {
     id: string;
     color: string;
     redirect: string;
-    hour: number;
-    minute: number;
+    timestamp: number;
     toDo: string | null;
     notif: string | null;
     update: boolean;
@@ -51,6 +50,7 @@ const useGeneral = defineStore("generalStore", {
                 ticket_notify_time: 0,
                 goal_notify_time: 0,
                 event_warning_time: 0,
+                habit_notify_time: 0,
                 zip_code: 0,
                 latitude: 0,
                 longitude: 0,
@@ -121,15 +121,19 @@ const useGeneral = defineStore("generalStore", {
             const miscStore = useMisc();
             const trophyStore = useTrophy();
             const timeStore = useTime();
+            const notebookStore = useNotebook();
 
             await ticketStore.initStore();
             await miscStore.initStore();
             await trophyStore.initStore();
             await timeStore.initStore();
+            await notebookStore.initStore();
 
             ticketStore.tickets.forEach((obj) => ticketStore.handleTicket(obj, false));
             trophyStore.goals.forEach((obj) => trophyStore.handleGoal(obj, false));
             timeStore.events.forEach((obj) => timeStore.handleEvent(obj, false));
+            notebookStore.habits.forEach((obj) => notebookStore.handleHabit(obj, false));
+            timeStore.reminders.forEach((obj) => timeStore.handleReminder(obj, false));
 
             this.setNextNotification();
         },
@@ -168,18 +172,16 @@ const useGeneral = defineStore("generalStore", {
         },
         addNotification(props: AddNotificationProps) {
             if (props.notif) {
-                const date = dayjs().startOf("day").hour(props.hour).minute(props.minute);
-
                 this.notifications.push({
                     id: props.id,
                     message: props.notif,
-                    time: date.format("HH:mm"),
-                    timestamp: date.unix(),
+                    time: dayjs.unix(props.timestamp).format("HH:mm"),
+                    timestamp: props.timestamp,
                     is_notified: false,
                     is_read: false,
                 });
 
-                if (props.update && this.nextNotification && this.nextNotification.timestamp >= date.unix()) {
+                if (props.update && this.nextNotification && this.nextNotification.timestamp >= props.timestamp) {
                     this.setNextNotification();
                 }
             }

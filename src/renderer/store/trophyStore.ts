@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { invoke } from "@helpers";
 import { Goal, GoalProps, Achievement, AchievementProps, Category, CategoryProps } from "@types";
 import { useGeneral } from "@store";
+import dayjs from "dayjs";
 
 interface TrophyStoreState {
     achievementTypes: Category[];
@@ -116,8 +117,7 @@ const useTrophy = defineStore("trophyStore", {
                     id: props.goal_id,
                     color: "blue",
                     redirect: "/trophy",
-                    hour: generalStore.settings.goal_notify_time,
-                    minute: 0,
+                    timestamp: dayjs().startOf("day").hour(generalStore.settings.goal_notify_time).unix(),
                     toDo: `Finish goal: ${props.goal}`,
                     notif: message,
                     update,

@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import { invoke } from "@helpers";
 import { Ticket, Category, TicketProps, CategoryProps } from "@types";
 import { useGeneral } from "@store";
+import dayjs from "dayjs";
 
 interface TicketStoreState {
     tickets: Ticket[];
@@ -90,8 +91,7 @@ const useTickets = defineStore("ticketStore", {
                     id: props.ticket_id,
                     color: "pink",
                     redirect: "/tickets",
-                    hour: generalStore.settings.ticket_notify_time,
-                    minute: 0,
+                    timestamp: dayjs().startOf("day").hour(generalStore.settings.ticket_notify_time).unix(),
                     toDo: `Finish ticket: ${props.ticket}`,
                     notif: message,
                     update,
