@@ -4,3 +4,8 @@ export * from "./achievementServices";
 export * from "./eventServices";
 export * from "./goalServices";
 export * from "./quoteServices";
+export * from "./habitServices";
+export * from "./noteServices";
+export * from "./reminderServices";
+export * from "./shoppingServices";
+export * from "./shortcutServices";

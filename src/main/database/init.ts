@@ -1,5 +1,5 @@
 import { openDB } from "../utils";
-import { migration_1, migration_2 } from "./";
+import { migration_1, migration_2, migration_3 } from "./";
 
 export const init = async () => {
     try {
@@ -16,9 +16,12 @@ export const init = async () => {
             case 1:
                 await migration_2();
                 database_version = 2;
+            case 2:
+                await migration_3();
+                database_version = 3;
         }
 
-        await db.run("UPDATE settings SET value = '2.0.0' WHERE key = 'app_version'");
+        await db.run("UPDATE settings SET value = '3.0.0' WHERE key = 'app_version'");
         console.log("Database is up to date");
     } catch (error) {
         console.log("Init function failed => ", error);

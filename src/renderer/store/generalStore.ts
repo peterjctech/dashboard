@@ -8,12 +8,13 @@ dayjs.extend(advancedFormat);
 
 interface AddNotificationProps {
     id: string;
-    type: string;
     color: string;
     redirect: string;
-    timestamp: number;
+    hour: number;
+    minute: number;
     toDo: string | null;
     notif: string | null;
+    update: boolean;
 }
 
 interface GeneralStoreState {
@@ -49,7 +50,7 @@ const useGeneral = defineStore("generalStore", {
                 app_version: "",
                 ticket_notify_time: 0,
                 goal_notify_time: 0,
-                event_notify_time: 0,
+                event_warning_time: 0,
                 zip_code: 0,
                 latitude: 0,
                 longitude: 0,
@@ -126,9 +127,9 @@ const useGeneral = defineStore("generalStore", {
             await trophyStore.initStore();
             await timeStore.initStore();
 
-            ticketStore.tickets.forEach((obj) => ticketStore.handleTicket(obj));
-            trophyStore.goals.forEach((obj) => trophyStore.handleGoal(obj));
-            timeStore.events.forEach((obj) => timeStore.handleEvent(obj));
+            ticketStore.tickets.forEach((obj) => ticketStore.handleTicket(obj, false));
+            trophyStore.goals.forEach((obj) => trophyStore.handleGoal(obj, false));
+            timeStore.events.forEach((obj) => timeStore.handleEvent(obj, false));
 
             this.setNextNotification();
         },
@@ -137,7 +138,6 @@ const useGeneral = defineStore("generalStore", {
             const timer = startOfTomorrow - dayjs().unix() + startOfDay;
             this.clock.timeLeft = dayjs.unix(timer).format("HH:mm:ss");
         },
-        // Manage Notifications
         setNextNotification() {
             const futureNotifs = this.notifications
                 .filter((obj) => !obj.is_notified)
@@ -166,24 +166,20 @@ const useGeneral = defineStore("generalStore", {
                 }
             });
         },
-        readAllNotifications() {
-            this.notifications = this.notifications.map((obj) => {
-                return { ...obj, is_read: true };
-            });
-        },
         addNotification(props: AddNotificationProps) {
             if (props.notif) {
+                const date = dayjs().startOf("day").hour(props.hour).minute(props.minute);
+
                 this.notifications.push({
                     id: props.id,
-                    type: props.type,
                     message: props.notif,
-                    time: dayjs.unix(props.timestamp).format("HH:mm"),
-                    timestamp: props.timestamp,
+                    time: date.format("HH:mm"),
+                    timestamp: date.unix(),
                     is_notified: false,
                     is_read: false,
                 });
 
-                if (!this.nextNotification || this.nextNotification.timestamp > props.timestamp) {
+                if (props.update && this.nextNotification && this.nextNotification.timestamp >= date.unix()) {
                     this.setNextNotification();
                 }
             }

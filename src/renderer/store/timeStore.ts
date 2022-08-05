@@ -26,7 +26,7 @@ const useTime = defineStore("timeStore", {
             const response: Event = await invoke("createEvent", props);
             if (response) {
                 this.events.push(response);
-                this.handleEvent(response);
+                this.handleEvent(response, true);
             }
             this.sortEvents();
         },
@@ -34,7 +34,7 @@ const useTime = defineStore("timeStore", {
             const response: Event = await invoke("updateEvent", props);
             if (response) {
                 this.events = this.events.map((obj) => (obj.event_id === response.event_id ? response : obj));
-                this.handleEvent(props);
+                this.handleEvent(props, true);
                 this.sortEvents();
             }
         },
@@ -49,7 +49,7 @@ const useTime = defineStore("timeStore", {
         sortEvents() {
             this.events = this.events.sort((a, b) => a.timestamp - b.timestamp);
         },
-        handleEvent(props: Event) {
+        handleEvent(props: Event, update: boolean) {
             const generalStore = useGeneral();
             let message = "";
             let status = 0;
@@ -64,14 +64,17 @@ const useTime = defineStore("timeStore", {
             if (hasNotif && !message) {
                 generalStore.deleteNotification(props.event_id);
             } else if (!hasNotif && message) {
+                const hour = dayjs.unix(props.timestamp).hour() - generalStore.settings.event_warning_time;
+
                 generalStore.addNotification({
                     id: props.event_id,
-                    type: "Event",
                     color: "magenta",
                     redirect: "/time",
-                    timestamp: props.timestamp - 3600,
+                    hour: hour > 0 ? hour : 0,
+                    minute: hour > 0 ? dayjs.unix(props.timestamp).minute() : 0,
                     toDo: message,
                     notif: status ? message : null,
+                    update,
                 });
             }
         },

@@ -34,17 +34,13 @@
         { title: "Time", key: "time", width: 100 },
     ];
 
-    const openNotifications = () => {
-        generalStore.readAllNotifications();
-        showModal.value = true;
-    };
     const checkClick = (event: Event) => {
         if ((event.target as HTMLInputElement).className === "notifications__modal") showModal.value = false;
     };
 </script>
 
 <template>
-    <div @click="openNotifications" class="notifications">
+    <div @click="showModal = true" class="notifications">
         <Icon variant="icon" :size="48">
             <NBadge :value="generalStore.notifications.filter((obj) => !obj.is_read && obj.is_notified).length">
                 <Notifications

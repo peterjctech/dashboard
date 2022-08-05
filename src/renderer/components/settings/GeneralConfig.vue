@@ -9,7 +9,7 @@
         database_version: 0,
         app_version: "",
         ticket_notify_time: 0,
-        event_notify_time: 0,
+        event_warning_time: 0,
         goal_notify_time: 0,
         zip_code: 0,
         latitude: 0,
@@ -27,6 +27,12 @@
             value: num,
         };
     });
+
+    const eventTimes = [
+        { label: "1 hour", value: 1 },
+        { label: "2 hours", value: 2 },
+        { label: "3 hours", value: 3 },
+    ];
 
     onMounted(() => {
         formData.value = JSON.parse(JSON.stringify(generalStore.settings));
@@ -54,6 +60,8 @@
         <Select v-model:value="formData.ticket_notify_time" :options="times" placeholder="Ticket Notification Time" />
         <label>Goal Notification Time</label>
         <Select v-model:value="formData.goal_notify_time" :options="times" placeholder="Goal Notification Time" />
+        <label>Event Warning Time</label>
+        <Select v-model:value="formData.event_warning_time" :options="eventTimes" placeholder="Event Warning Time" />
     </Form>
     <section>
         <NTable :single-line="false" striped>
@@ -83,6 +91,10 @@
                 <tr>
                     <td>Goal Notification Time</td>
                     <td>{{ generalStore.settings.goal_notify_time }}:00</td>
+                </tr>
+                <tr>
+                    <td>Event Warning Time</td>
+                    <td>{{ generalStore.settings.event_warning_time }} hours</td>
                 </tr>
             </tbody>
         </NTable>

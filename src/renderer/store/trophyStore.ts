@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { invoke } from "@helpers";
 import { Goal, GoalProps, Achievement, AchievementProps, Category, CategoryProps } from "@types";
 import { useGeneral } from "@store";
-import dayjs from "dayjs";
 
 interface TrophyStoreState {
     achievementTypes: Category[];
@@ -65,7 +64,7 @@ const useTrophy = defineStore("trophyStore", {
             const response: Goal = await invoke("createGoal", props);
             if (response) {
                 this.goals.push(response);
-                this.handleGoal(response);
+                this.handleGoal(response, true);
             }
             this.sortGoals();
         },
@@ -103,7 +102,7 @@ const useTrophy = defineStore("trophyStore", {
                 });
             }
         },
-        handleGoal(props: Goal) {
+        handleGoal(props: Goal, update: boolean) {
             const generalStore = useGeneral();
             let message = "";
             const hasNotif = generalStore.checkForNotification(props.goal_id);
@@ -115,12 +114,13 @@ const useTrophy = defineStore("trophyStore", {
             } else if (!hasNotif && message) {
                 generalStore.addNotification({
                     id: props.goal_id,
-                    type: "Goal",
                     color: "blue",
                     redirect: "/trophy",
-                    timestamp: dayjs().startOf("day").hour(generalStore.settings.goal_notify_time).unix(),
+                    hour: generalStore.settings.goal_notify_time,
+                    minute: 0,
                     toDo: `Finish goal: ${props.goal}`,
                     notif: message,
+                    update,
                 });
             }
         },

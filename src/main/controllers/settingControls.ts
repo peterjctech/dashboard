@@ -8,7 +8,7 @@ ipcMain.handle("getSettings", async () => {
         app_version: "",
         ticket_notify_time: 0,
         goal_notify_time: 0,
-        event_notify_time: 0,
+        event_warning_time: 0,
         zip_code: 0,
         latitude: 0,
         longitude: 0,
@@ -38,7 +38,7 @@ ipcMain.handle("updateSettings", async (_, props: Settings) => {
         };
 
         await update("ticket_notify_time", props.ticket_notify_time);
-        await update("event_notify_time", props.event_notify_time);
+        await update("event_warning_time", props.event_warning_time);
         await update("goal_notify_time", props.goal_notify_time);
         await update("zip_code", props.zip_code);
         await update("latitude", props.latitude);

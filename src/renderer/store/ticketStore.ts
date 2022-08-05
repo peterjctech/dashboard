@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { invoke } from "@helpers";
 import { Ticket, Category, TicketProps, CategoryProps } from "@types";
 import { useGeneral } from "@store";
-import dayjs from "dayjs";
 
 interface TicketStoreState {
     tickets: Ticket[];
@@ -45,7 +44,7 @@ const useTickets = defineStore("ticketStore", {
             if (response) {
                 this.tickets.push(response);
                 this.sortTickets();
-                this.handleTicket(response);
+                this.handleTicket(response, true);
             }
         },
         async toggleTicket(props: Ticket) {
@@ -54,7 +53,7 @@ const useTickets = defineStore("ticketStore", {
                 this.tickets = this.tickets.map((obj) => {
                     return obj.ticket_id === response.ticket_id ? response : obj;
                 });
-                this.handleTicket(response);
+                this.handleTicket(response, true);
             }
         },
         async delayTicket(props: Ticket) {
@@ -64,7 +63,7 @@ const useTickets = defineStore("ticketStore", {
                     return obj.ticket_id === response.ticket_id ? response : obj;
                 });
                 this.sortTickets();
-                this.handleTicket(response);
+                this.handleTicket(response, true);
             }
         },
         async deleteTicket(props: Ticket) {
@@ -76,7 +75,7 @@ const useTickets = defineStore("ticketStore", {
         sortTickets() {
             this.tickets = this.tickets.sort((a, b) => a.timestamp - b.timestamp);
         },
-        handleTicket(props: Ticket) {
+        handleTicket(props: Ticket, update: boolean) {
             const generalStore = useGeneral();
             let message = "";
             const hasNotif = generalStore.checkForNotification(props.ticket_id);
@@ -89,12 +88,13 @@ const useTickets = defineStore("ticketStore", {
             } else if (!hasNotif && message) {
                 generalStore.addNotification({
                     id: props.ticket_id,
-                    type: "Ticket",
                     color: "pink",
                     redirect: "/tickets",
-                    timestamp: dayjs().startOf("day").hour(generalStore.settings.ticket_notify_time).unix(),
+                    hour: generalStore.settings.ticket_notify_time,
+                    minute: 0,
                     toDo: `Finish ticket: ${props.ticket}`,
                     notif: message,
+                    update,
                 });
             }
         },

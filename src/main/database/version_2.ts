@@ -13,7 +13,7 @@ export const migration_2 = async () => {
             await db.run("INSERT INTO settings (key, value) VALUES (?, ?)", [key, value]);
         };
 
-        await insertSetting("event_notify_time", 0);
+        await insertSetting("event_warning_time", 0);
         await insertSetting("goal_notify_time", 0);
         await insertSetting("zip_code", 0);
         await insertSetting("latitude", 0);
