@@ -1,9 +1,10 @@
 <script setup lang="ts">
-    import { Tickets } from "@common";
+    import { Events, Tickets } from "@common";
     import { Quote, Clock } from "@components";
-    import { useTickets } from "@store";
+    import { useTickets, useTime } from "@store";
 
     const ticketStore = useTickets();
+    const timeStore = useTime();
 </script>
 
 <template>
@@ -12,6 +13,11 @@
             :tickets="ticketStore.tickets.filter((obj) => obj.is_focused)"
             focused
             style="grid-area: 1 / 1 / 4 / 2"
+        />
+        <Events
+            :events="timeStore.events.filter((obj) => obj.status !== 'None')"
+            compact
+            style="grid-area: 1 / 2 / 5 / 3"
         />
         <Quote style="grid-area: 1 / 3 / 5 / 4" />
         <Clock style="grid-area: 6 / 3 / 7 / 4" />

@@ -1,5 +1,5 @@
 import { createWebHashHistory, createRouter } from "vue-router";
-import { HomePage, SettingsPage, TicketsPage, TrophyPage } from "@views";
+import { HomePage, SettingsPage, TicketsPage, TrophyPage, TimePage } from "@views";
 
 const router = createRouter({
     history: createWebHashHistory(),
@@ -11,6 +11,10 @@ const router = createRouter({
         {
             path: "/tickets",
             component: TicketsPage,
+        },
+        {
+            path: "/time",
+            component: TimePage,
         },
         {
             path: "/trophy",

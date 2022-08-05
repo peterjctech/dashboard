@@ -14,3 +14,26 @@
         transform: translate(50%, 50%);
     }
 }
+
+.modal {
+    width: fit-content;
+    min-width: 30%;
+
+    label {
+        display: block;
+        margin: 3rem auto 1rem 0;
+    }
+
+    section {
+        display: flex;
+
+        > * {
+            margin-right: 1rem;
+            width: 30%;
+        }
+    }
+
+    .n-button {
+        float: right;
+    }
+}

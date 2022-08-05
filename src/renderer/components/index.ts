@@ -9,6 +9,8 @@ import Quote from "./home/Quote.vue";
 import TicketFilters from "./tickets/TicketFilters.vue";
 import TicketForm from "./tickets/TicketForm.vue";
 
+import EventForm from "./time/EventForm.vue";
+
 import Goals from "./trophy/Goals.vue";
 import GoalForm from "./trophy/GoalForm.vue";
 import AchievementTypes from "./trophy/AchievementTypes.vue";
@@ -36,4 +38,5 @@ export {
     AchievementForm,
     AchievementTypes,
     AchievementConfig,
+    EventForm,
 };
