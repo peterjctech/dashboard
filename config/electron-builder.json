@@ -1,16 +1,19 @@
 {
     "appId": "com.electron.app",
     "directories": {
-        "output": "dist"
+        "output": "dist",
+        "buildResources": "public"
     },
     "nsis": {
         "oneClick": false,
         "perMachine": false,
         "allowToChangeInstallationDirectory": true,
+        "createDesktopShortcut": true,
         "shortcutName": "Dasboard"
     },
     "win": {
-        "target": "nsis"
+        "target": "nsis",
+        "publish": ["github"]
     },
     "linux": {
         "target": ["snap"]
