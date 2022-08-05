@@ -49,9 +49,9 @@ const seed_1 = async () => {
                 [model.ticket_id, model.ticket, model.is_focused, model.timestamp, model.date, model.category_id]
             );
         }
-        console.log("Seeded database version 0...");
+        console.log("Seeded database version 1...");
     } catch (error) {
-        console.log("Failed to seed database version 0 => ", error);
+        console.log("Failed to seed database version 1 => ", error);
     }
 };
 

@@ -3,7 +3,7 @@ import advancedFormat from "dayjs/plugin/advancedFormat";
 
 dayjs.extend(advancedFormat);
 
-export const formatDate = (date: dayjs.Dayjs | number, type: "date" | "shortdate") => {
+export const formatDate = (date: dayjs.Dayjs | number, type: "date" | "shortdate" | "datetime") => {
     let dateObj;
 
     if (typeof date === "number") {
@@ -17,5 +17,7 @@ export const formatDate = (date: dayjs.Dayjs | number, type: "date" | "shortdate
             return dateObj.format("dddd, Do MMMM, YYYY");
         case "shortdate":
             return dateObj.format("Do MMMM, YYYY");
+        case "datetime":
+            return dateObj.format("HH:mm, Do MMMM, YYYY");
     }
 };
