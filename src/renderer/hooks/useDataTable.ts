@@ -1,5 +1,6 @@
 import { Component, h } from "vue";
 import { Icon } from "@common";
+import image from "@assets/images/black.png";
 
 interface IconProps {
     title: string;
@@ -15,6 +16,11 @@ interface ConditionalIconProps {
     click: Function;
     icons: [Component, Component];
     condition: string;
+}
+
+interface ImageProps {
+    title: string;
+    imageProp: string;
 }
 
 const useDataTable = {
@@ -40,6 +46,19 @@ const useDataTable = {
                 );
             },
             width: 80,
+        };
+    },
+    image: (props: ImageProps) => {
+        return {
+            title: props.title,
+            key: props.title.toLowerCase(),
+            render(row: any) {
+                return h("img", {
+                    src: row[props.imageProp] ? row[props.imageProp] : image,
+                    style: "height: 8rem",
+                });
+            },
+            width: 120,
         };
     },
 };

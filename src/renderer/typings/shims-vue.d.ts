@@ -6,3 +6,4 @@ declare module "*.vue" {
 }
 
 declare module "*.mp3";
+declare module "*.png";
